@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\App",
+    "\\App\\Controllers",
+    "\\DomainLayer",
+    "\\DomainLayer\\Configurations",
+    "\\ServiceLayer",
+    "\\ServiceLayer\\DTOs",
+    "\\ServiceLayer\\DTOs\\Slider",
+    "\\ServiceLayer\\Services",
+    "\\ServiceLayer\\Services\\Interfaces"
+  ],
+  "PreviewInSolutionExplorer": false
+}
