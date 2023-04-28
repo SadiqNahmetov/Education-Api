@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sREGfnU3AejwZ719DkmOqozdSJ8R5JW+2o9TEeKf9ihwQ+1/+ZTBPsKj3WGkmT6sBfjNv+8fpFlE032lmFja0w==",
+  "dgSpecHash": "QiHTjL1hh1Bhll2xtycFhhwm6o9JpUFYJdrivb9xSnigADFAm+5efhaDioz+MhuU5y2ZPNFl0N0b3Q7H54GvkQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Sadiq\\Desktop\\React-Api-Project\\ServiceLayer\\ServiceLayer.csproj",
+  "projectFilePath": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\ServiceLayer\\ServiceLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Sadiq\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Sadiq\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

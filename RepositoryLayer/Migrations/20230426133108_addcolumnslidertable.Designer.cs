@@ -12,8 +12,8 @@ using RepositoryLayer.Data;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230425141315_CreateSliderTable")]
-    partial class CreateSliderTable
+    [Migration("20230426133108_addcolumnslidertable")]
+    partial class addcolumnslidertable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,11 +35,11 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 4, 25, 14, 13, 15, 265, DateTimeKind.Utc).AddTicks(1647));
+                        .HasDefaultValue(new DateTime(2023, 4, 26, 13, 31, 8, 223, DateTimeKind.Utc).AddTicks(6325));
 
-                    b.Property<string>("Image")
+                    b.Property<byte[]>("Image")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("SoftDeleted")
                         .ValueGeneratedOnAdd()

@@ -9,11 +9,11 @@ namespace RepositoryLayer.Repositories.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        Task<List<T>> GetAll();
-        Task<T> Get(int id); 
-        Task Create(T entity);
-        Task Update(T entity);
-        Task Delete(int entity);
+        Task<List<T>> GetAllAsync();
+        Task<T> GetAsync(int id);
+        Task CreateAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task DeleteAsync(int entity);
 
 
        

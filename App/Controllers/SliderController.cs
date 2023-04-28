@@ -40,6 +40,14 @@ namespace App.Controllers
         //}
 
         [HttpGet]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _sliderService.GetAsync(id);
+            return Ok(result);
+        }
+
+
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var result = await _sliderService.GetAllAsync();

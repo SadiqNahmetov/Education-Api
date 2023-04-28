@@ -19,6 +19,8 @@ namespace RepositoryLayer.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SliderConfiguration());
+            modelBuilder.ApplyConfiguration(new TitleConfiguration());  
+            modelBuilder.ApplyConfiguration(new HeaderConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

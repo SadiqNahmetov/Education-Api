@@ -2,6 +2,7 @@
 using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Product;
+using ServiceLayer.DTOs.Slider;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -23,19 +24,27 @@ namespace ServiceLayer.Services
         {
             _repo = repo;
             _mapper = mapper;
-        } 
+        }
 
         public async Task CreateAsync(SliderCreateDto slider)
         {
-            var mapData = _mapper.Map<Slider>(slider);
-            await _repo.Create(mapData);
+            var model = _mapper.Map<Slider>(slider);
+            await _repo.CreateAsync(model);
         }
 
-        public async Task<List<SliderCreateDto>> GetAllAsync()
+        public async Task<List<SliderListDto>> GetAllAsync()
         {
-           var model = await _repo.GetAll();
-           var result = _mapper.Map<List<SliderCreateDto>>(model);
+           var model = await _repo.GetAllAsync();
+           var result = _mapper.Map<List<SliderListDto>>(model);
             return result;
+        }
+
+        
+        public async Task<SliderListDto> GetAsync(int id)
+        {
+            var model = await _repo.GetAsync(id);
+            var res = _mapper.Map<SliderListDto>(model);
+            return res;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace RepositoryLayer.Migrations
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     SoftDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 25, 14, 13, 15, 265, DateTimeKind.Utc).AddTicks(1647))
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 4, 26, 13, 9, 7, 25, DateTimeKind.Utc).AddTicks(4210))
                 },
                 constraints: table =>
                 {

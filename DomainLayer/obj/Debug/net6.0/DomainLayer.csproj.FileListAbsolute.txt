@@ -46,3 +46,15 @@ C:\Users\Sadiq\Desktop\React-Api-Project\DomainLayer\obj\Debug\net6.0\DomainLaye
 C:\Users\Sadiq\Desktop\React-Api-Project\DomainLayer\obj\Debug\net6.0\refint\DomainLayer.dll
 C:\Users\Sadiq\Desktop\React-Api-Project\DomainLayer\obj\Debug\net6.0\DomainLayer.pdb
 C:\Users\Sadiq\Desktop\React-Api-Project\DomainLayer\obj\Debug\net6.0\ref\DomainLayer.dll
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\bin\Debug\net6.0\DomainLayer.deps.json
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\bin\Debug\net6.0\DomainLayer.dll
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\bin\Debug\net6.0\DomainLayer.pdb
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\obj\Debug\net6.0\DomainLayer.csproj.AssemblyReference.cache
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\obj\Debug\net6.0\DomainLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\obj\Debug\net6.0\DomainLayer.AssemblyInfoInputs.cache
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\obj\Debug\net6.0\DomainLayer.AssemblyInfo.cs
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\obj\Debug\net6.0\DomainLayer.csproj.CoreCompileInputs.cache
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\obj\Debug\net6.0\DomainLayer.dll
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\obj\Debug\net6.0\refint\DomainLayer.dll
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\obj\Debug\net6.0\DomainLayer.pdb
+C:\Users\Sadiq\Desktop\Api-Project\DomainLayer\obj\Debug\net6.0\ref\DomainLayer.dll

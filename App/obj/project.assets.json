@@ -2310,11 +2310,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sadiq\\Desktop\\React-Api-Project\\App\\App.csproj",
+      "projectUniqueName": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\App\\App.csproj",
       "projectName": "App",
-      "projectPath": "C:\\Users\\Sadiq\\Desktop\\React-Api-Project\\App\\App.csproj",
+      "projectPath": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\App\\App.csproj",
       "packagesPath": "C:\\Users\\Sadiq\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sadiq\\Desktop\\React-Api-Project\\App\\obj\\",
+      "outputPath": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\App\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2335,11 +2335,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Sadiq\\Desktop\\React-Api-Project\\RepositoryLayer\\RepositoryLayer.csproj": {
-              "projectPath": "C:\\Users\\Sadiq\\Desktop\\React-Api-Project\\RepositoryLayer\\RepositoryLayer.csproj"
+            "C:\\Users\\Sadiq\\Desktop\\Api-Project\\RepositoryLayer\\RepositoryLayer.csproj": {
+              "projectPath": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\RepositoryLayer\\RepositoryLayer.csproj"
             },
-            "C:\\Users\\Sadiq\\Desktop\\React-Api-Project\\ServiceLayer\\ServiceLayer.csproj": {
-              "projectPath": "C:\\Users\\Sadiq\\Desktop\\React-Api-Project\\ServiceLayer\\ServiceLayer.csproj"
+            "C:\\Users\\Sadiq\\Desktop\\Api-Project\\ServiceLayer\\ServiceLayer.csproj": {
+              "projectPath": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\ServiceLayer\\ServiceLayer.csproj"
             }
           }
         }

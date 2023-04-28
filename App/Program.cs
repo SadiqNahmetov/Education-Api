@@ -28,6 +28,16 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 builder.Services.AddScoped<ISliderService, SliderService>();
+builder.Services.AddScoped<ITitleRepository, TitleRepository>();
+builder.Services.AddScoped<ITitleService, TitleService>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "mycors",
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:3000");
+                      });
+});
 
 
 var app = builder.Build();
@@ -39,7 +49,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("mycors");
 app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
 
