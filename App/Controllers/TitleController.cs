@@ -40,6 +40,21 @@ namespace App.Controllers
             return Ok(result);
         }
 
+        [HttpPut, Route("{id}")]
+        public async Task<IActionResult> Update([Required][FromRoute]int id, TitleUpdateDto titleUpdateDto)
+        {
+            try
+            {
+                await _titleService.UpdateAsync(id, titleUpdateDto);
+
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
+
+                return NotFound();
+            }
+        }
 
         [HttpDelete]
        public async Task<IActionResult> Delete([Required]int id)

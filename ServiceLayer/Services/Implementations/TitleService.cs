@@ -61,9 +61,13 @@ namespace ServiceLayer.Services.Implementations
             return res;
         }
 
-        public Task UpdateAsync(int id, TitleUpdateDto titleUpdate)
+        public async Task UpdateAsync(int id, TitleUpdateDto titleUpdate)
         {
-            throw new NotImplementedException();
+            var dbTitle = await _repo.GetAsync(id); 
+
+            _mapper.Map(titleUpdate, dbTitle);
+
+            await _repo.UpdateAsync(dbTitle);
         }
 
        
