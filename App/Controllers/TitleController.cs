@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.DTOs.Title;
 using ServiceLayer.Services.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Controllers
 {
@@ -12,6 +14,14 @@ namespace App.Controllers
         {
             _titleService = titleService;
             _webHostEnvironment = webHostEnvironment;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] TitleCreateDto titleCreateDto)
+        {
+            await _titleService.CreateAsync(titleCreateDto);
+
+            return Ok();
         }
 
 
@@ -30,6 +40,13 @@ namespace App.Controllers
             return Ok(result);
         }
 
-      
+
+        [HttpDelete]
+       public async Task<IActionResult> Delete([Required]int id)
+        {
+            await _titleService.DeleteAsync(id);
+
+            return Ok();
+        }
     }
 }

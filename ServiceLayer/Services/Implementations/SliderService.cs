@@ -26,10 +26,17 @@ namespace ServiceLayer.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task CreateAsync(SliderCreateDto slider)
+        public async Task CreateAsync(SliderCreateDto sliderCreateDto)
         {
-            var mapData = _mapper.Map<Slider>(slider);
-            await _repo.CreateAsync(mapData);
+            if (!await _repo.IsExsist(m => m.Title == sliderCreateDto.Title))
+            {
+                var mapData = _mapper.Map<Slider>(sliderCreateDto);
+                await _repo.CreateAsync(mapData);
+            }
+            else
+            {
+                throw new Exception("Slider is alerdy exsist");
+            }
 
 
         }
@@ -60,11 +67,11 @@ namespace ServiceLayer.Services.Implementations
             return res;
         }
 
-        public async Task UpdateAsync(int id, SliderUpdateDto slider)
+        public async Task UpdateAsync(int id, SliderUpdateDto sliderUpdateDto)
         {
             var dbSlider = await _repo.GetAsync(id);
 
-            _mapper.Map(slider, dbSlider);
+            _mapper.Map(sliderUpdateDto, dbSlider);
 
             await _repo.UpdateAsync(dbSlider);
         }

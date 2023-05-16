@@ -9,7 +9,14 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface ITitleService
     {
-        Task<List<TitleDto>> GetAllAsync();
+        Task<List<TitleListDto>> GetAllAsync();
+
         Task<TitleDto> GetAsync(int id);
+
+        Task CreateAsync(TitleCreateDto titleCreate);
+
+        Task UpdateAsync(int id, TitleUpdateDto titleUpdate);
+
+        Task DeleteAsync(int id);
     }
 }

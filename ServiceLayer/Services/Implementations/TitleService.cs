@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Title;
 using ServiceLayer.Services.Interfaces;
@@ -23,11 +24,30 @@ namespace ServiceLayer.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<List<TitleDto>> GetAllAsync()
+        public async Task CreateAsync(TitleCreateDto titleCreate)
+        {
+            if (! await _repo.IsExsist(m=>m.Name == titleCreate.Name))
+            {
+                await _repo.CreateAsync(_mapper.Map<Title>(titleCreate));
+            }
+            else
+            {
+                throw new Exception("Title is alerdy exsist");
+            }
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var title = await _repo.GetAsync(id);
+
+            await _repo.DeleteAsync(title);
+        }
+
+        public async Task<List<TitleListDto>> GetAllAsync()
         {
             var model = await _repo.GetAllAsync();
 
-            var mapData = _mapper.Map<List<TitleDto>>(model);
+            var mapData = _mapper.Map<List<TitleListDto>>(model);
 
             return mapData;
 
@@ -41,5 +61,11 @@ namespace ServiceLayer.Services.Implementations
             return res;
         }
 
+        public Task UpdateAsync(int id, TitleUpdateDto titleUpdate)
+        {
+            throw new NotImplementedException();
+        }
+
+       
     }
 }

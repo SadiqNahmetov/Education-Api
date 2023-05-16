@@ -17,10 +17,10 @@ namespace App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] SliderCreateDto slider)
+        public async Task<IActionResult> Create([FromBody] SliderCreateDto sliderCreateDto)
         {
 
-            await _sliderService.CreateAsync(slider);
+            await _sliderService.CreateAsync(sliderCreateDto);
             return Ok();
 
           

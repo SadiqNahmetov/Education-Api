@@ -20,6 +20,9 @@ namespace ServiceLayer.Mappings
             CreateMap<Slider, SliderUpdateDto>().ReverseMap();
 
             CreateMap<Title, TitleDto>().ReverseMap();
+            CreateMap<Title, TitleListDto>().ReverseMap();
+            CreateMap<Title, TitleCreateDto>().ReverseMap();
+            CreateMap<Title, TitleUpdateDto>().ReverseMap();
         }
     }
 }
