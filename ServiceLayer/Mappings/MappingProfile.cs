@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
+using ServiceLayer.DTOs.Header;
 using ServiceLayer.DTOs.Slider;
 using ServiceLayer.DTOs.Title;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ServiceLayer.Mappings
 {
@@ -23,6 +20,11 @@ namespace ServiceLayer.Mappings
             CreateMap<Title, TitleListDto>().ReverseMap();
             CreateMap<Title, TitleCreateDto>().ReverseMap();
             CreateMap<Title, TitleUpdateDto>().ReverseMap();
+
+            CreateMap<Header, HeaderDto>().ReverseMap();
+            CreateMap<Header, HeaderListDto>().ReverseMap();
+            CreateMap<Header, HeaderCreateDto>().ReverseMap();
+            CreateMap<Header, HeaderUpdateDto>().ReverseMap();
         }
     }
 }
