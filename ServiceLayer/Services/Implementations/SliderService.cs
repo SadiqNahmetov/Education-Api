@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
-using ServiceLayer.DTOs.Product;
 using ServiceLayer.DTOs.Slider;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceLayer.Services
+namespace ServiceLayer.Services.Implementations
 {
     public class SliderService : ISliderService
     {
@@ -18,7 +18,7 @@ namespace ServiceLayer.Services
         private readonly ISliderRepository _repo;
         private readonly IMapper _mapper;
 
-   
+
 
         public SliderService(ISliderRepository repo, IMapper mapper)
         {
@@ -28,23 +28,45 @@ namespace ServiceLayer.Services
 
         public async Task CreateAsync(SliderCreateDto slider)
         {
-            var model = _mapper.Map<Slider>(slider);
-            await _repo.CreateAsync(model);
+            var mapData = _mapper.Map<Slider>(slider);
+            await _repo.CreateAsync(mapData);
+
+
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var slider = await _repo.GetAsync(id);
+
+            await _repo.DeleteAsync(slider);
         }
 
         public async Task<List<SliderListDto>> GetAllAsync()
         {
-           var model = await _repo.GetAllAsync();
-           var result = _mapper.Map<List<SliderListDto>>(model);
+            var model = await _repo.GetAllAsync();
+
+            var result = _mapper.Map<List<SliderListDto>>(model);
+
             return result;
         }
 
-        
-        public async Task<SliderListDto> GetAsync(int id)
+
+        public async Task<SliderDto> GetAsync(int id)
         {
             var model = await _repo.GetAsync(id);
-            var res = _mapper.Map<SliderListDto>(model);
+
+            var res = _mapper.Map<SliderDto>(model);
+
             return res;
+        }
+
+        public async Task UpdateAsync(int id, SliderUpdateDto slider)
+        {
+            var dbSlider = await _repo.GetAsync(id);
+
+            _mapper.Map(slider, dbSlider);
+
+            await _repo.UpdateAsync(dbSlider);
         }
     }
 }

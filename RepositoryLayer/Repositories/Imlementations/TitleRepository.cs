@@ -7,13 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryLayer.Repositories
+namespace RepositoryLayer.Repositories.Imlementations
 {
-    public class SliderRepository : Repository<Slider>,ISliderRepository
+    public class TitleRepository : Repository<Title>, ITitleRepository
     {
-        public SliderRepository(AppDbContext context) : base(context)
+        public TitleRepository(AppDbContext context) : base(context)
         {
-
         }
     }
 }

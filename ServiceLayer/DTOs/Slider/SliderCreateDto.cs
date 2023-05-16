@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceLayer.DTOs.Product
+namespace ServiceLayer.DTOs.Slider
 {
     public class SliderCreateDto
     {
         public string? Title { get; set; }
         public byte[]? Image { get; set; }
-
     }
 }

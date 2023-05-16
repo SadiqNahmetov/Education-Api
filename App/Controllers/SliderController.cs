@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.DTOs.Product;
+using ServiceLayer.DTOs.Slider;
 using ServiceLayer.Services.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Controllers
 {
@@ -15,34 +16,21 @@ namespace App.Controllers
             _env = env;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] SliderCreateDto slider)
+        {
 
+            await _sliderService.CreateAsync(slider);
+            return Ok();
 
-
-        //[HttpPost]
-        //public async Task<IActionResult> Create([FromForm] SliderCreateDto slider, [FromForm] IFormFile file)
-        //{
-        //    // Get the file name and extension
-        //    var fileName = file.FileName;
-        //    var fileExtension = Path.GetExtension(fileName);
-
-        //    // Save the file to the server
-        //    var filePath = Path.Combine(_env.WebRootPath, "images", fileName);
-        //    using (var stream = new FileStream(filePath, FileMode.Create))
-        //    {
-        //        await file.CopyToAsync(stream);
-        //    }
-
-        //    // Use ImageProcessing or other library to create the image
-        //    // ...
-
-        //    await _sliderService.CreateAsync(slider);
-        //    return Ok();
-        //}
+          
+        }
 
         [HttpGet]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById([Required] int id)
         {
             var result = await _sliderService.GetAsync(id);
+
             return Ok(result);
         }
 
@@ -52,6 +40,29 @@ namespace App.Controllers
         {
             var result = await _sliderService.GetAllAsync();
             return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([Required]int id)
+        {
+            await _sliderService.DeleteAsync(id);
+
+            return Ok();
+        }
+
+        [HttpPut, Route("{id}")]
+        public async Task<IActionResult> Update([Required][FromRoute] int id, SliderUpdateDto sliderUpdateDto)
+        {
+            try
+            {
+                await _sliderService.UpdateAsync(id, sliderUpdateDto);
+
+                return Ok(sliderUpdateDto);
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();  
+            }
         }
 
     }

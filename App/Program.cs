@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Data;
-using RepositoryLayer.Repositories;
+using RepositoryLayer.Repositories.Imlementations;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.Mappings;
-using ServiceLayer.Services;
+using ServiceLayer.Services.Implementations;
 using ServiceLayer.Services.Interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceLayer.Services
+namespace ServiceLayer.Services.Implementations
 {
     public class TitleService : ITitleService
     {

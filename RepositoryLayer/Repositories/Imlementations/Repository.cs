@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryLayer.Repositories
+namespace RepositoryLayer.Repositories.Imlementations
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
@@ -17,8 +17,8 @@ namespace RepositoryLayer.Repositories
 
         public Repository(AppDbContext context)
         {
-            _context= context;
-            _entities= _context.Set<T>();
+            _context = context;
+            _entities = _context.Set<T>();
         }
 
         public async Task CreateAsync(T entity)
@@ -26,15 +26,20 @@ namespace RepositoryLayer.Repositories
             if (entity == null) throw new ArgumentNullException();
 
             await _entities.AddAsync(entity);
+
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int entity)
+        public async Task DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            if (_entities == null) throw new ArgumentNullException();
+
+            _entities.Remove(entity);
+
+            await _context.SaveChangesAsync();  
         }
 
-        public async Task<T> GetAsync  (int id)
+        public async Task<T> GetAsync(int id)
         {
             return await _entities.FindAsync(id) ?? throw new NotImplementedException();
         }
@@ -46,7 +51,11 @@ namespace RepositoryLayer.Repositories
 
         public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            if (!_entities.Contains(entity)) throw new NotImplementedException();
+
+            _entities.Update(entity);
+
+            await _context.SaveChangesAsync();
         }
     }
 

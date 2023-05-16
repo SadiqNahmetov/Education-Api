@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
-using ServiceLayer.DTOs.Product;
 using ServiceLayer.DTOs.Slider;
 using ServiceLayer.DTOs.Title;
 using System;
@@ -15,9 +14,12 @@ namespace ServiceLayer.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<Slider, SliderCreateDto>();
-            CreateMap<Slider, SliderListDto>();
-            CreateMap<Title, TitleDto>();
+            CreateMap<Slider, SliderDto>().ReverseMap();
+            CreateMap<Slider, SliderListDto>().ReverseMap();
+            CreateMap<Slider, SliderCreateDto>().ReverseMap();
+            CreateMap<Slider, SliderUpdateDto>().ReverseMap();
+
+            CreateMap<Title, TitleDto>().ReverseMap();
         }
     }
 }

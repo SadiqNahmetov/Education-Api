@@ -13,7 +13,7 @@ namespace RepositoryLayer.Repositories.Interfaces
         Task<T> GetAsync(int id);
         Task CreateAsync(T entity);
         Task UpdateAsync(T entity);
-        Task DeleteAsync(int entity);
+        Task DeleteAsync(T entity);
 
 
        
