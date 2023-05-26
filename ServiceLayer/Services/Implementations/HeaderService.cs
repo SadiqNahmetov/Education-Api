@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Header;
 using ServiceLayer.DTOs.Slider;
@@ -25,9 +26,18 @@ namespace ServiceLayer.Services.Implementations
         }
 
 
-        public Task CreateAsync(HeaderCreateDto headerCreateDto)
+        public async Task CreateAsync(HeaderCreateDto headerCreateDto)
         {
-            throw new NotImplementedException();
+           if (! await _repo.IsExsist(m=>m.Title == headerCreateDto.Title)) 
+            {
+                var mapData = _mapper.Map<Header>(headerCreateDto);
+
+                await _repo.CreateAsync(mapData);
+            }
+            else
+            {
+                throw new Exception("Header is alerdy exsist");
+            }
         }
 
         public Task DeleteAsync(int id)
@@ -53,9 +63,14 @@ namespace ServiceLayer.Services.Implementations
             return result;
         }
 
-        public Task UpdateAsync(int id, HeaderUpdateDto headerUpdateDto)
+        public async Task UpdateAsync(int id, HeaderUpdateDto headerUpdateDto)
         {
-            throw new NotImplementedException();
+           var dbHeader = await _repo.GetAsync(id);
+
+            _mapper.Map(headerUpdateDto, dbHeader);
+
+            await _repo.UpdateAsync(dbHeader);
+
         }
     }
 }
