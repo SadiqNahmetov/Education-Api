@@ -26,6 +26,7 @@ namespace RepositoryLayer.Data
             modelBuilder.ApplyConfiguration(new CourseConfiguration());
             modelBuilder.ApplyConfiguration(new CourseAuthorConfiguration());
             modelBuilder.ApplyConfiguration(new StudentConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

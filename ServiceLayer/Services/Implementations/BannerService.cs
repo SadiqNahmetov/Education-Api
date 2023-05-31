@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Banner;
 using ServiceLayer.DTOs.Header;
@@ -21,15 +22,21 @@ namespace ServiceLayer.Services.Implementations
             _mapper = mapper;
         }
 
-        public Task CreateAsync(BannerCreateDto bannerCreateDto)
+        public async Task CreateAsync(BannerCreateDto bannerCreateDto)
         {
-            throw new NotImplementedException();
+            if (!await _repo.IsExsist(m => m.Title == bannerCreateDto.Title))
+            {
+                var mapData = _mapper.Map<Banner>(bannerCreateDto);
+
+                await _repo.CreateAsync(mapData);
+            }
+            else
+            {
+                throw new Exception("Banner is alerdy exsist");
+            }
         }
 
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+ 
 
         public async Task<List<BannerListDto>> GetAllAsync()
         {
@@ -40,14 +47,28 @@ namespace ServiceLayer.Services.Implementations
             return result;
         }
 
-        public Task<BannerDto> GetAsync(int id)
+        public async Task<BannerDto> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            var model = await _repo.GetAsync(id);
+
+            var result = _mapper.Map<BannerDto>(model);
+
+            return result;
         }
 
-        public Task UpdateAsync(int id, BannerUpdateDto bannerUpdateDto)
+        public async Task UpdateAsync(int id, BannerUpdateDto bannerUpdateDto)
         {
-            throw new NotImplementedException();
+            var dbBaner = await _repo.GetAsync(id);
+
+            _mapper.Map(bannerUpdateDto, dbBaner);
+
+            await _repo.UpdateAsync(dbBaner);
+        }
+        public async Task DeleteAsync(int id)
+        {
+            var slider = await _repo.GetAsync(id);
+
+            await _repo.DeleteAsync(slider);
         }
     }
 }

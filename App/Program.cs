@@ -26,6 +26,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 builder.Services.AddScoped<ISliderService, SliderService>();
 
@@ -34,6 +35,14 @@ builder.Services.AddScoped<ITitleService, TitleService>();
 
 builder.Services.AddScoped<IHeaderRepository, HeaderRepository>();
 builder.Services.AddScoped<IHeaderService, HeaderService>();
+
+builder.Services.AddScoped<IBannerRepository, BannerRepository>();
+builder.Services.AddScoped<IBannerService, BannerService>();
+
+
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IServiceService, ServiceServices>();
+
 
 builder.Services.AddCors(options =>
 {

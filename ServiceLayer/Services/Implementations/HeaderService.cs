@@ -40,10 +40,7 @@ namespace ServiceLayer.Services.Implementations
             }
         }
 
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+    
 
         public async Task<List<HeaderListDto>> GetAllAsync()
         {
@@ -71,6 +68,13 @@ namespace ServiceLayer.Services.Implementations
 
             await _repo.UpdateAsync(dbHeader);
 
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var slider = await _repo.GetAsync(id);
+
+            await _repo.DeleteAsync(slider);
         }
     }
 }

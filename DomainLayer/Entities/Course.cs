@@ -9,7 +9,7 @@ namespace DomainLayer.Entities
 {
     public class Course : BaseEntity
     {
-        public byte? Image { get; set; }
+        public byte[]? Image { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
 
