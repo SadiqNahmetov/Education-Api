@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
 using ServiceLayer.DTOs.Banner;
+using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.Header;
 using ServiceLayer.DTOs.Service;
 using ServiceLayer.DTOs.Slider;
@@ -39,6 +40,12 @@ namespace ServiceLayer.Mappings
             CreateMap<Service, ServiceListDto>().ReverseMap();
             CreateMap<Service, ServiceCreateDto>().ReverseMap();
             CreateMap<Service, ServiceUpdateDto>().ReverseMap();
+
+            CreateMap<Contact, ContactDto>().ReverseMap();
+            CreateMap<Contact, ContactListDto>().ReverseMap();
+            CreateMap<Contact, ContactCreateDto>().ReverseMap();
+            CreateMap<Contact, ContactUpdateDto>().ReverseMap();
+
         }
     }
 }

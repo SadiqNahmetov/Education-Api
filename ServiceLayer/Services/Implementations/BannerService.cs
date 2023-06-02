@@ -40,20 +40,12 @@ namespace ServiceLayer.Services.Implementations
 
         public async Task<List<BannerListDto>> GetAllAsync()
         {
-            var model = await _repo.GetAllAsync();
-
-            var result = _mapper.Map<List<BannerListDto>>(model);
-
-            return result;
+            return _mapper.Map<List<BannerListDto>>(await _repo.GetAllAsync());
         }
 
         public async Task<BannerDto> GetAsync(int id)
         {
-            var model = await _repo.GetAsync(id);
-
-            var result = _mapper.Map<BannerDto>(model);
-
-            return result;
+            return _mapper.Map<BannerDto>(await _repo.GetAsync(id));
         }
 
         public async Task UpdateAsync(int id, BannerUpdateDto bannerUpdateDto)
@@ -66,9 +58,7 @@ namespace ServiceLayer.Services.Implementations
         }
         public async Task DeleteAsync(int id)
         {
-            var slider = await _repo.GetAsync(id);
-
-            await _repo.DeleteAsync(slider);
+            await _repo.DeleteAsync(await _repo.GetAsync(id));
         }
     }
 }
