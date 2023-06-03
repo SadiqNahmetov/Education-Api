@@ -47,6 +47,9 @@ builder.Services.AddScoped<IServiceService, ServiceServices>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
 
+builder.Services.AddScoped<IAboutRepository, AboutRepository>();
+builder.Services.AddScoped<IAboutService, AboutService>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "mycors",
