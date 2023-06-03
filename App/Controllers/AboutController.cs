@@ -47,6 +47,44 @@ namespace App.Controllers
 
         }
 
-      
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] AboutCreateDto aboutCreateDto)
+        {
+            await _aboutService.CreateAsync(aboutCreateDto);
+
+            return Ok();
+        }
+
+
+        [HttpPut, Route("{id}")]
+        public async Task<IActionResult> Update([FromRoute][Required] int id, AboutUpdateDto aboutUpdateDto)
+        {
+            try
+            {
+                await _aboutService.UpdateAsync(id, aboutUpdateDto);
+
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([Required] int id)
+        {
+            try
+            {
+                await _aboutService.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
     }
 }
