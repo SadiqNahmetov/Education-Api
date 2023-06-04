@@ -16,7 +16,7 @@ namespace DomainLayer.Configurations
         public void Configure(EntityTypeBuilder<Contact> builder)
         {
             builder.Property(m => m.Name).IsRequired().HasMaxLength(100);
-            builder.Property(m => m.Message).IsRequired().HasMaxLength(250);
+            builder.Property(m => m.Message).IsRequired().HasMaxLength(500);
             builder.Property(m => m.Email).IsRequired().HasMaxLength(100);
             builder.Property(m => m.SoftDeleted).HasDefaultValue(false);
             builder.Property(m => m.CreateDate).HasDefaultValue(DateTime.UtcNow);

@@ -8,7 +8,7 @@ namespace ServiceLayer.DTOs.Slider
 {
     public class SliderCreateDto
     {
-        public string? Title { get; set; }
         public byte[]? Image { get; set; }
+        public string? Title { get; set; }
     }
 }
