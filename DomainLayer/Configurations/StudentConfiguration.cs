@@ -15,8 +15,6 @@ namespace DomainLayer.Configurations
             builder.Property(m => m.CourseId).IsRequired();
             builder.Property(m => m.Age).IsRequired();
             builder.Property(m => m.SoftDeleted).HasDefaultValue(false);
-            builder.Property(m => m.CreateDate).HasDefaultValue(DateTime.Now);
-            builder.Property(m => m.UpdateDate).HasDefaultValue(DateTime.Now);
         }
     }
 }

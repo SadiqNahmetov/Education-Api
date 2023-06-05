@@ -16,8 +16,6 @@ namespace DomainLayer.Configurations
             builder.Property(m => m.Image).IsRequired();
             builder.Property(m => m.Title).IsRequired().HasMaxLength(100);
             builder.Property(m => m.SoftDeleted).HasDefaultValue(false);
-            builder.Property(m => m.CreateDate).HasDefaultValue(DateTime.UtcNow);
-            builder.Property(m => m.UpdateDate).HasDefaultValue(DateTime.UtcNow);
 
         }
     }

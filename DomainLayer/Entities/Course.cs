@@ -15,6 +15,8 @@ namespace DomainLayer.Entities
 
         public decimal? Price { get; set; }
 
+        public ICollection<Sutudent>? Sutudents { get; set; }
+
         public ICollection<CourseAuthor>? CourseAuthors { get; set; }
 
 
