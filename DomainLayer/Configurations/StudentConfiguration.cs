@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DomainLayer.Configurations
 {
-    public class StudentConfiguration : IEntityTypeConfiguration<Sutudent>
+    public class StudentConfiguration : IEntityTypeConfiguration<Student>
     {
-        public void Configure(EntityTypeBuilder<Sutudent> builder)
+        public void Configure(EntityTypeBuilder<Student> builder)
         {
             builder.Property(m => m.Image).IsRequired();
             builder.Property(m => m.FullName).IsRequired().HasMaxLength(50);

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Entities
 {
-    public class Author :BaseEntity
+    public class Author : BaseEntity
     {
         public byte[]? Image { get; set; }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Entities
 {
-    public class Sutudent : BaseEntity
+    public class Student : BaseEntity
     {
         public byte[]? Image { get; set; }
         public string? FullName { get; set; }
@@ -15,6 +15,6 @@ namespace DomainLayer.Entities
         public string? Info { get; set; }
         public bool IsGraduated { get; set; }
         public int CourseId { get; set; }
-        public Course? Course { get; set; }
+        public ICollection<Course>? Courses { get; set; }
     }
 }
