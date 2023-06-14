@@ -15,6 +15,6 @@ namespace DomainLayer.Entities
         public string? Info { get; set; }
         public bool IsGraduated { get; set; }
         public int CourseId { get; set; }
-        public ICollection<Course>? Courses { get; set; }
+        public Course? Courses { get; set; }
     }
 }

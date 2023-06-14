@@ -14,7 +14,6 @@ namespace DomainLayer.Configurations
             builder.Property(m => m.IsGraduated).IsRequired().HasDefaultValue(false);
             builder.Property(m => m.CourseId).IsRequired();
             builder.Property(m => m.Age).IsRequired();
-            builder.Property(m => m.SoftDeleted).HasDefaultValue(false);
         }
     }
 }

@@ -50,6 +50,15 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IAboutRepository, AboutRepository>();
 builder.Services.AddScoped<IAboutService, AboutService>();
 
+
+
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<ICourseService, CourseService>();
+
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IAuthorService, AuthorService>();
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "mycors",

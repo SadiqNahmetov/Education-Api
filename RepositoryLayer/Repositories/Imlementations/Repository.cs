@@ -59,6 +59,11 @@ namespace RepositoryLayer.Repositories.Imlementations
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<T>> FindAllByExpression(Expression<Func<T, bool>> expression)
+        {
+            return await _entities.Where(expression).ToListAsync();
+        }
+
         public async Task<bool> IsExsist(Expression<Func<T, bool>> expression)
         {
             return await _entities.AnyAsync(expression);
