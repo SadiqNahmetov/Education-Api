@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceLayer.Services.Helpers
+namespace ServiceLayer.Helpers
 {
     public static class FileExtentions
     {

@@ -15,7 +15,7 @@ namespace DomainLayer.Entities
 
         public string? Position { get; set; }
 
-        public ICollection<CourseAuthor>? CourseAuthors { get; set; }
+        public List<CourseAuthor>? CourseAuthors { get; set; }
 
 
 

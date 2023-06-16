@@ -18,7 +18,7 @@ namespace App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] BannerCreateDto bannerCreateDto)
+        public async Task<IActionResult> Create([FromForm] BannerCreateDto bannerCreateDto)
         {
             await _bannerService.CreateAsync(bannerCreateDto);
 
@@ -47,7 +47,7 @@ namespace App.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([Required][FromRoute] int id, BannerUpdateDto bannerUpdateDto)
+        public async Task<IActionResult> Update([Required] int id, [FromRoute] BannerUpdateDto bannerUpdateDto)
         {
             try
             {

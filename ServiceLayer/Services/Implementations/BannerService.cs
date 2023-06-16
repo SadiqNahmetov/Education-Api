@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
+using ServiceLayer.DTOs.About;
 using ServiceLayer.DTOs.Banner;
 using ServiceLayer.DTOs.Header;
+using ServiceLayer.Helpers;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,9 +28,12 @@ namespace ServiceLayer.Services.Implementations
         {
             if (!await _repo.IsExsist(m => m.Title == bannerCreateDto.Title))
             {
-                var mapData = _mapper.Map<Banner>(bannerCreateDto);
+                var mapBanner = _mapper.Map<Banner>(bannerCreateDto);
 
-                await _repo.CreateAsync(mapData);
+                mapBanner.Image = await bannerCreateDto.Photo.GetBytes();
+
+                await _repo.CreateAsync(mapBanner);
+
             }
             else
             {
@@ -52,9 +57,13 @@ namespace ServiceLayer.Services.Implementations
         {
             var dbBaner = await _repo.GetAsync(id);
 
-            _mapper.Map(bannerUpdateDto, dbBaner);
+            var mapAbout = _mapper.Map(bannerUpdateDto, dbBaner);
+
+            mapAbout.Image = await bannerUpdateDto.Photo.GetBytes();
 
             await _repo.UpdateAsync(dbBaner);
+
+
         }
         public async Task DeleteAsync(int id)
         {

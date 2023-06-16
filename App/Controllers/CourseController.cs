@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.Course;
+using ServiceLayer.Services.Implementations;
 using ServiceLayer.Services.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Controllers
 {
@@ -25,6 +27,32 @@ namespace App.Controllers
             catch (NullReferenceException)
             {
                 return BadRequest(new { ErrorMessage = "Not Created" });
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetById([Required] int id)
+        {
+            try
+            {
+                return Ok(await _courseService.GetAsync(id));
+            }
+            catch (Exception)
+            {
+                return NotFound("Please enter a valid Id!");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                return Ok(await _courseService.GetAllAsync());
+            }
+            catch (Exception)
+            {
+                return NotFound("No information found!");
             }
         }
     }

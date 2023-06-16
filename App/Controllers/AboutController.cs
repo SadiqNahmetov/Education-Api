@@ -18,6 +18,15 @@ namespace App.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm] AboutCreateDto aboutCreateDto)
+        {
+            await _aboutService.CreateAsync(aboutCreateDto);
+
+            return Ok();
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> Get([Required] int id)
         {
@@ -47,17 +56,10 @@ namespace App.Controllers
 
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] AboutCreateDto aboutCreateDto)
-        {
-            await _aboutService.CreateAsync(aboutCreateDto);
-
-            return Ok();
-        }
-
+    
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, AboutUpdateDto aboutUpdateDto)
+        public async Task<IActionResult> Update([FromRoute] int id,[FromForm] AboutUpdateDto aboutUpdateDto)
         {
             try
             {

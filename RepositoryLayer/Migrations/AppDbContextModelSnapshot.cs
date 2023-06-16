@@ -22,21 +22,6 @@ namespace RepositoryLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("CourseStudent", b =>
-                {
-                    b.Property<int>("CoursesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CoursesId", "StudentsId");
-
-                    b.HasIndex("StudentsId");
-
-                    b.ToTable("CourseStudent");
-                });
-
             modelBuilder.Entity("DomainLayer.Entities.About", b =>
                 {
                     b.Property<int>("Id")
@@ -422,6 +407,8 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("Student");
                 });
 
@@ -455,21 +442,6 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("Title");
                 });
 
-            modelBuilder.Entity("CourseStudent", b =>
-                {
-                    b.HasOne("DomainLayer.Entities.Course", null)
-                        .WithMany()
-                        .HasForeignKey("CoursesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.Entities.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DomainLayer.Entities.CourseAuthor", b =>
                 {
                     b.HasOne("DomainLayer.Entities.Author", "Author")
@@ -489,6 +461,17 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("DomainLayer.Entities.Student", b =>
+                {
+                    b.HasOne("DomainLayer.Entities.Course", "Courses")
+                        .WithMany("Students")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Courses");
+                });
+
             modelBuilder.Entity("DomainLayer.Entities.Author", b =>
                 {
                     b.Navigation("CourseAuthors");
@@ -497,6 +480,8 @@ namespace RepositoryLayer.Migrations
             modelBuilder.Entity("DomainLayer.Entities.Course", b =>
                 {
                     b.Navigation("CourseAuthors");
+
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

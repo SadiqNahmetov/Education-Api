@@ -2,7 +2,7 @@
 using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Course;
-using ServiceLayer.Services.Helpers;
+using ServiceLayer.Helpers;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;

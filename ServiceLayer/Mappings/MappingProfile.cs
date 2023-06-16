@@ -8,6 +8,7 @@ using ServiceLayer.DTOs.Course;
 using ServiceLayer.DTOs.Header;
 using ServiceLayer.DTOs.Service;
 using ServiceLayer.DTOs.Slider;
+using ServiceLayer.DTOs.Student;
 using ServiceLayer.DTOs.Title;
 
 
@@ -17,8 +18,14 @@ namespace ServiceLayer.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<Slider, SliderDto>().ReverseMap();
-            CreateMap<Slider, SliderListDto>().ReverseMap();
+            CreateMap<Slider, SliderDto>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
+            CreateMap<Slider, SliderListDto>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
             CreateMap<Slider, SliderCreateDto>().ReverseMap();
             CreateMap<Slider, SliderUpdateDto>().ReverseMap();
 
@@ -27,20 +34,38 @@ namespace ServiceLayer.Mappings
             CreateMap<Title, TitleCreateDto>().ReverseMap();
             CreateMap<Title, TitleUpdateDto>().ReverseMap();
 
-            CreateMap<Header, HeaderDto>().ReverseMap();
-            CreateMap<Header, HeaderListDto>().ReverseMap();
+            CreateMap<Header, HeaderDto>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
+            CreateMap<Header, HeaderListDto>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
             CreateMap<Header, HeaderCreateDto>().ReverseMap();
             CreateMap<Header, HeaderUpdateDto>().ReverseMap();
 
 
-            CreateMap<Banner, BannerDto>().ReverseMap();
-            CreateMap<Banner, BannerListDto>().ReverseMap();
+            CreateMap<Banner, BannerDto>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
+            CreateMap<Banner, BannerListDto>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
             CreateMap<Banner, BannerCreateDto>().ReverseMap();
             CreateMap<Banner, BannerUpdateDto>().ReverseMap();
 
 
-            CreateMap<Service, ServiceDto>().ReverseMap();
-            CreateMap<Service, ServiceListDto>().ReverseMap();
+            CreateMap<Service, ServiceDto>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
+            CreateMap<Service, ServiceListDto>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
             CreateMap<Service, ServiceCreateDto>().ReverseMap();
             CreateMap<Service, ServiceUpdateDto>().ReverseMap();
 
@@ -50,27 +75,63 @@ namespace ServiceLayer.Mappings
             CreateMap<Contact, ContactUpdateDto>().ReverseMap();
 
 
-            CreateMap<About, AboutDto>().ReverseMap();
-            CreateMap<About, AboutListDto>().ReverseMap();
+            CreateMap<About, AboutDto>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
+            CreateMap<About, AboutListDto>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
             CreateMap<About, AboutCreateDto>().ReverseMap();
             CreateMap<About, AboutUpdateDto>().ReverseMap();
 
-            CreateMap<Course, CourseDto>().ReverseMap();
+
+            CreateMap<Course, CourseDto>()
+                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(c => c.CourseAuthors.Where(ca => ca.CourseId == c.Id).Select(ca => ca.Author.Name)))
+                .ForMember(dest => dest.StudentFullName, opt => opt.MapFrom(c => c.Students.Select(s => s.FullName)))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+
             CreateMap<Course, CourseListDto>()
-                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(c => c.CourseAuthors
-                .Where(ca => ca.CourseId == c.Id)
-                .Select(ca => ca.Author.Name)))
-                .ForMember(dest => dest.StudentFullName, opt => opt.MapFrom(src => src.Students.Select(s => s.FullName)));
+                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(c => c.CourseAuthors.Where(ca => ca.CourseId == c.Id).Select(ca => ca.Author.Name)))
+                .ForMember(dest => dest.StudentFullName, opt => opt.MapFrom(c => c.Students.Select(s => s.FullName)))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
 
-            CreateMap<Course, CourseCreateDto>().ReverseMap();
+            CreateMap<Course, CourseCreateDto>()
+                .ReverseMap();
+            CreateMap<Course, CourseUpdateDto>()
+                .ReverseMap();
 
-            CreateMap<Author, AuthorDto>().ReverseMap();
+
+
+            CreateMap<Author, AuthorDto>()
+                .ForMember(dest => dest.CourseName, opt => opt.MapFrom(a => a.CourseAuthors
+                .Where(ca => ca.AuthorId == a.Id).Select(ca => ca.Course.Name)))
+                .ReverseMap();
+
             CreateMap<Author, AuthorListDto>()
                 .ForMember(dest => dest.CourseTitle, opt => opt.MapFrom(a => a.CourseAuthors
                 .Where(ca => ca.CourseId == a.Id)
                 .Select(ca => ca.Course.Name)));
-            CreateMap<Author, AuthorCreateDto>().ReverseMap();
 
+            CreateMap<Author, AuthorCreateDto>()
+                .ForMember(dest => dest.Photo, opt => opt.MapFrom(s=> Convert.ToBase64String(s.Image)))
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(s => s.Name))
+                .ReverseMap();
+
+
+            CreateMap<Student, StudentDto>()
+                .ForMember(dest => dest.CourseTitle, opt => opt.MapFrom(s => s.Course.Name))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+            CreateMap<Student, StudentListDto>()
+                .ForMember(dest => dest.CourseTitle, opt => opt.MapFrom(s => s.Course.Name))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                .ReverseMap();
+            CreateMap<Student, StudentCreateDto>()
+                .ReverseMap();
         }
     }
 }

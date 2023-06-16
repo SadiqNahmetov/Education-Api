@@ -2,7 +2,7 @@
 using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Author;
-using ServiceLayer.Services.Helpers;
+using ServiceLayer.Helpers;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,6 +26,7 @@ namespace ServiceLayer.Services.Implementations
             _courseRepository = courseRepository;
             _mapper = mapper;
         }
+
 
         public async Task CreateAsync(AuthorCreateDto authorCreateDto)
         {
@@ -57,7 +58,6 @@ namespace ServiceLayer.Services.Implementations
             }
         }
 
-
         public async Task<AuthorDto> GetAsync(int id)
         {
             return _mapper.Map<AuthorDto>(await _authorRepository.GetAsync(id));
@@ -67,9 +67,7 @@ namespace ServiceLayer.Services.Implementations
 
         public async Task<List<AuthorListDto>> GetAllAsync()
         {
-            var authors = await _authorRepository.GetAllWithCoursesAsync();
-
-            return _mapper.Map<List<AuthorListDto>>(authors);
+            return _mapper.Map<List<AuthorListDto>>(await _authorRepository.GetAllWithCoursesAsync());
         }
 
        

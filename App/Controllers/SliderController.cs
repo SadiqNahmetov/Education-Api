@@ -17,7 +17,7 @@ namespace App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] SliderCreateDto sliderCreateDto)
+        public async Task<IActionResult> Create([FromForm] SliderCreateDto sliderCreateDto)
         {
 
             await _sliderService.CreateAsync(sliderCreateDto);
@@ -51,7 +51,7 @@ namespace App.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([Required][FromRoute] int id, SliderUpdateDto sliderUpdateDto)
+        public async Task<IActionResult> Update([Required][FromRoute] int id, [FromRoute] SliderUpdateDto sliderUpdateDto)
         {
             try
             {

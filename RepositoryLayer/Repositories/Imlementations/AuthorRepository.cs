@@ -22,7 +22,19 @@ namespace RepositoryLayer.Repositories.Imlementations
                 _authors = _context.Set<Author>();
             }
 
-            public async Task<List<Author>> GetAllWithCoursesAsync()
+
+        public async Task<Author> GetWithCoursesAsync(int id)
+        {
+            var author = await _authors
+                .Where(a => !a.isDeleted)
+                .Include("CourseAuthors")
+                .Include("CourseAuthors.Course")
+                .FirstOrDefaultAsync(a => a.Id == id) ?? throw new NullReferenceException();
+
+            return author;
+        }
+
+        public async Task<List<Author>> GetAllWithCoursesAsync()
             {
                 var authors = await _authors
                     .Where(a => !a.isDeleted)

@@ -18,7 +18,7 @@ namespace App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ServiceCreateDto serviceCreateDto)
+        public async Task<IActionResult> Create([FromForm] ServiceCreateDto serviceCreateDto)
         {
             await _serviceService.CreateAsync(serviceCreateDto);
 
@@ -47,7 +47,7 @@ namespace App.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([Required][FromRoute] int id, ServiceUpdateDto serviceUpdateDto)
+        public async Task<IActionResult> Update([Required][FromRoute] int id, [FromRoute] ServiceUpdateDto serviceUpdateDto)
         {
             try
             {

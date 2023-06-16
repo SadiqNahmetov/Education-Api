@@ -19,7 +19,7 @@ namespace App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]HeaderCreateDto headerCreateDto)
+        public async Task<IActionResult> Create([FromForm]HeaderCreateDto headerCreateDto)
         {
             await _headerService.CreateAsync(headerCreateDto);
 
@@ -43,7 +43,7 @@ namespace App.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([Required][FromRoute]int id, HeaderUpdateDto headerUpdateDto)
+        public async Task<IActionResult> Update([Required][FromRoute]int id, [FromRoute] HeaderUpdateDto headerUpdateDto)
         {
             try
             {

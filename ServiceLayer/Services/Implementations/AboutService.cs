@@ -2,6 +2,7 @@
 using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.About;
+using ServiceLayer.Helpers;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,11 @@ namespace ServiceLayer.Services.Implementations
         {
             if (!await _repo.IsExsist(a => a.Title == aboutCreateDto.Title))
             {
-                await _repo.CreateAsync(_mapper.Map<About>(aboutCreateDto));
+                var mapAbout = _mapper.Map<About>(aboutCreateDto);
+
+                mapAbout.Image = await aboutCreateDto.Photo.GetBytes();
+
+                await _repo.CreateAsync(mapAbout);
             }
             else
             {
@@ -50,9 +55,14 @@ namespace ServiceLayer.Services.Implementations
         {
             var dbAbout = await _repo.GetAsync(id);
 
-            _mapper.Map(aboutUpdateDto, dbAbout);
+            var mapAbout = _mapper.Map(aboutUpdateDto, dbAbout);
+
+            mapAbout.Image = await aboutUpdateDto.Photo.GetBytes();
 
             await _repo.UpdateAsync(dbAbout);
+                                   
+                 
+               
 
         }
 

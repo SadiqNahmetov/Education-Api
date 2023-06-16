@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ namespace ServiceLayer.DTOs.Header
 {
     public class HeaderCreateDto
     {
-        public byte[]? Image { get; set; }
+        public IFormFile? Photo { get; set; }
+
 
         public string? Title { get; set; }
     }
