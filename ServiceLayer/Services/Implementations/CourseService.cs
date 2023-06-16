@@ -25,21 +25,6 @@ namespace ServiceLayer.Services.Implementations
             _mapper = mapper;
         }
 
-
-        public async Task<CourseDto> GetAsync(int id)
-        {
-            return _mapper.Map<CourseDto>(await _courseRepository.GetWithAuthorsAndStudentsAsync(id));
-        }
-
-
-        public async Task<List<CourseListDto>> GetAllAsync()
-        {
-            var courses = await _courseRepository.GetAllWithAuthorsAndStudentsAsync();
-
-            return _mapper.Map<List<CourseListDto>>(courses);
-        }
-
-
         public async Task CreateAsync(CourseCreateDto courseCreateDto)
         {
             if (courseCreateDto.AuthorIds != null && courseCreateDto.AuthorIds.Any())
@@ -68,6 +53,74 @@ namespace ServiceLayer.Services.Implementations
             {
                 throw new Exception("You must select at least one author.");
             }
+        }
+
+
+        public async Task<CourseDto> GetAsync(int id)
+        {
+            return _mapper.Map<CourseDto>(await _courseRepository.GetWithAuthorsAndStudentsAsync(id));
+        }
+
+
+        public async Task<List<CourseListDto>> GetAllAsync()
+        {
+            var courses = await _courseRepository.GetAllWithAuthorsAndStudentsAsync();
+
+            return _mapper.Map<List<CourseListDto>>(courses);
+        }
+
+
+
+        public async Task UpdateAsync(int id, CourseUpdateDto courseUpdateDto)
+        {
+            //var dbCart = await _repo.GetNew(id);
+
+            //var mapCart = _mapper.Map<Carts>(cart);
+            //mapCart.Image = await cart.Photo.GetBytes();
+            //mapCart.CartAuthors = new List<CartAuthor>();
+
+
+            if (courseUpdateDto.AuthorIds != null && courseUpdateDto.AuthorIds.Any())
+            {
+                var authors = await _authorRepository.FindAllByExpression(a => courseUpdateDto.AuthorIds.Contains(a.Id));
+
+                var mapCart = _mapper.Map<Course>(courseUpdateDto);
+                mapCart.Id = id;
+                mapCart.Image = await courseUpdateDto.Photo.GetBytes();
+                mapCart.CourseAuthors = new List<CourseAuthor>();
+
+                foreach (var author in authors)
+                {
+                    if (mapCart.CourseAuthors.Any(a => a.AuthorId == author.Id))
+                    {
+                        var cartAuthor = new CourseAuthor
+                        {
+                            Course = mapCart,
+
+
+                            AuthorId = (await GetAsync(author.Id)).Id
+                        };
+                        mapCart.CourseAuthors.Add(cartAuthor);
+
+                    }
+                }
+                _mapper.Map(courseUpdateDto, mapCart);
+                await _courseRepository.UpdateAsync(mapCart);
+            }
+            else
+            {
+                throw new Exception("You must select at least one author.");
+            }
+        }
+
+
+
+
+
+
+        public Task DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

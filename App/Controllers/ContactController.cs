@@ -48,7 +48,7 @@ namespace App.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ContactCreateDto contactCreateDto)
+        public async Task<IActionResult> Create([FromForm] ContactCreateDto contactCreateDto)
         {
             ContactCreateDtoValidator validator = new();
             var validationResult = validator.Validate(contactCreateDto);
@@ -71,7 +71,7 @@ namespace App.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([FromRoute][Required] int id, ContactUpdateDto contactUpdateDto)
+        public async Task<IActionResult> Update([FromRoute][Required] int id,[FromForm] ContactUpdateDto contactUpdateDto)
         {
             ContactUpdateDtoValidator validator = new();
             var validationResult = validator.Validate(contactUpdateDto);

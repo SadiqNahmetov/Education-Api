@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ServiceLayer.DTOs.Author
 {
     public class AuthorUpdateDto
     {
-        public byte[]? Image { get; set; }
+        public IFormFile? Photo { get; set; }
 
         public string? Name { get; set; }
 

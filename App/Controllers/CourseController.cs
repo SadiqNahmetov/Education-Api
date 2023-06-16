@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DomainLayer.Entities;
+using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.Course;
 using ServiceLayer.Services.Implementations;
 using ServiceLayer.Services.Interfaces;
@@ -55,5 +56,27 @@ namespace App.Controllers
                 return NotFound("No information found!");
             }
         }
+
+
+        [HttpPut, Route("{id}")]
+
+        public async Task<IActionResult> Update([FromRoute] int id, [FromForm] CourseUpdateDto courseUpdateDto)
+        {
+            try
+            {
+                await _courseService.UpdateAsync(id, courseUpdateDto);
+                return Ok();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while updating the course: {ex.Message}");
+            }
+        }
+
+
     }
 }
