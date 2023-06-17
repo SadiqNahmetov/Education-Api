@@ -66,14 +66,12 @@ namespace App.Controllers
             {
                 await _courseService.UpdateAsync(id, courseUpdateDto);
                 return Ok();
+
             }
-            catch (InvalidOperationException ex)
+            catch (NullReferenceException)
             {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"An error occurred while updating the course: {ex.Message}");
+
+                return BadRequest(new { ErrorMessage = "Not Update" });
             }
         }
 

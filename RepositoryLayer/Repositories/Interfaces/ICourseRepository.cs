@@ -12,6 +12,12 @@ namespace RepositoryLayer.Repositories.Interfaces
         Task<Course> GetWithAuthorsAndStudentsAsync(int id);
 
         Task<List<Course>> GetAllWithAuthorsAndStudentsAsync();
-        
+
+        //Task<List<Course>> GetAllCartAuthor();
+
+        //Task<Course> GetByIdCartAuthor(int id);
+
+        Task DeleteCartAuthor(List<CourseAuthor> courseAuthors);
+
     }
 }

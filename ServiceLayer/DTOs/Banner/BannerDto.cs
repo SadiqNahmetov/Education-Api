@@ -8,7 +8,7 @@ namespace ServiceLayer.DTOs.Banner
 {
     public class BannerDto
     {
-        public byte[]? Image { get; set; }
+        public string? Image { get; set; }
 
         public string? Title { get; set; }
     }

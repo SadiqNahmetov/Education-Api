@@ -9,7 +9,7 @@ namespace ServiceLayer.DTOs.Author
 {
     public class AuthorDto
     {
-        public byte[]? Image { get; set; }
+        public string? Image { get; set; }
         public string? Name { get; set; }
         public string? Position { get; set; }
         public List<string>? CourseName { get; set; }

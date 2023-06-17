@@ -70,16 +70,8 @@ namespace ServiceLayer.Services.Implementations
         }
 
 
-
         public async Task UpdateAsync(int id, CourseUpdateDto courseUpdateDto)
         {
-            //var dbCart = await _repo.GetNew(id);
-
-            //var mapCart = _mapper.Map<Carts>(cart);
-            //mapCart.Image = await cart.Photo.GetBytes();
-            //mapCart.CartAuthors = new List<CartAuthor>();
-
-
             if (courseUpdateDto.AuthorIds != null && courseUpdateDto.AuthorIds.Any())
             {
                 var authors = await _authorRepository.FindAllByExpression(a => courseUpdateDto.AuthorIds.Contains(a.Id));
@@ -88,21 +80,21 @@ namespace ServiceLayer.Services.Implementations
                 mapCart.Id = id;
                 mapCart.Image = await courseUpdateDto.Photo.GetBytes();
                 mapCart.CourseAuthors = new List<CourseAuthor>();
+                var courseAuthor1 = await _courseRepository.GetWithAuthorsAndStudentsAsync(id);
+
+                await _courseRepository.DeleteCartAuthor(courseAuthor1.CourseAuthors.ToList());
 
                 foreach (var author in authors)
                 {
-                    if (mapCart.CourseAuthors.Any(a => a.AuthorId == author.Id))
+
+                    var courseAuthor = new CourseAuthor
                     {
-                        var cartAuthor = new CourseAuthor
-                        {
-                            Course = mapCart,
+                        CourseId = id,
+                        AuthorId = (await GetAsync(author.Id)).Id
+                    };
+                    mapCart.CourseAuthors.Add(courseAuthor);
 
 
-                            AuthorId = (await GetAsync(author.Id)).Id
-                        };
-                        mapCart.CourseAuthors.Add(cartAuthor);
-
-                    }
                 }
                 _mapper.Map(courseUpdateDto, mapCart);
                 await _courseRepository.UpdateAsync(mapCart);
@@ -112,7 +104,6 @@ namespace ServiceLayer.Services.Implementations
                 throw new Exception("You must select at least one author.");
             }
         }
-
 
 
 

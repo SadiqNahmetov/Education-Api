@@ -51,7 +51,7 @@ namespace App.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([Required][FromRoute] int id, [FromRoute] SliderUpdateDto sliderUpdateDto)
+        public async Task<IActionResult> Update([Required][FromRoute] int id, [FromForm] SliderUpdateDto sliderUpdateDto)
         {
             try
             {

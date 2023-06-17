@@ -46,6 +46,9 @@ namespace ServiceLayer.Mappings
             CreateMap<Header, HeaderUpdateDto>().ReverseMap();
 
 
+
+
+
             CreateMap<Banner, BannerDto>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
                 .ReverseMap();
