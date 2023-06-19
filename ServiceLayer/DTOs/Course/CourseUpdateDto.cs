@@ -13,9 +13,13 @@ namespace ServiceLayer.DTOs.Course
         public string? Name { get; set; }
         public string? Description { get; set; }
         public decimal? Price { get; set; }
-        public List<int>? AuthorIds { get; set; }
 
         //public List<int>? StudentIds { get; set; }
+
+        public List<int>? AuthorIds { get; set; }
+
+
+   
 
     }
 }

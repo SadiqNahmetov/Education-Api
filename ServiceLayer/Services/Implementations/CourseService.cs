@@ -74,30 +74,27 @@ namespace ServiceLayer.Services.Implementations
         {
             if (courseUpdateDto.AuthorIds != null && courseUpdateDto.AuthorIds.Any())
             {
-                var authors = await _authorRepository.FindAllByExpression(a => courseUpdateDto.AuthorIds.Contains(a.Id));
+                var authors = await _courseRepository.FindAllByExpression(a => courseUpdateDto.AuthorIds.Contains(a.Id));
 
-                var mapCart = _mapper.Map<Course>(courseUpdateDto);
-                mapCart.Id = id;
-                mapCart.Image = await courseUpdateDto.Photo.GetBytes();
-                mapCart.CourseAuthors = new List<CourseAuthor>();
-                var courseAuthor1 = await _courseRepository.GetWithAuthorsAndStudentsAsync(id);
+                var dbCourse = await _courseRepository.GetWithAuthorsAndStudentsAsync(id);
 
-                await _courseRepository.DeleteCartAuthor(courseAuthor1.CourseAuthors.ToList());
+                await _courseRepository.DeleteCourseAuthor(dbCourse.CourseAuthors.ToList());
 
                 foreach (var author in authors)
                 {
-
                     var courseAuthor = new CourseAuthor
                     {
                         CourseId = id,
-                        AuthorId = (await GetAsync(author.Id)).Id
+                        AuthorId = author.Id
                     };
-                    mapCart.CourseAuthors.Add(courseAuthor);
 
-
+                    dbCourse.CourseAuthors?.Add(courseAuthor);
                 }
-                _mapper.Map(courseUpdateDto, mapCart);
-                await _courseRepository.UpdateAsync(mapCart);
+                var mapCourse = _mapper.Map(courseUpdateDto, dbCourse);
+
+                mapCourse.Image = await courseUpdateDto.Photo.GetBytes();
+
+                await _courseRepository.UpdateAsync(mapCourse);
             }
             else
             {
@@ -107,11 +104,9 @@ namespace ServiceLayer.Services.Implementations
 
 
 
-
-
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await _courseRepository.DeleteAsync(await _courseRepository.GetAsync(id));
         }
     }
 }
