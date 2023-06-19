@@ -291,7 +291,12 @@ C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\App.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\App.pdb
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -306,6 +311,8 @@ C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.IdentityModel.
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.OpenApi.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -355,10 +362,3 @@ C:\Users\Sadiq\Desktop\Api-Project\App\obj\Debug\net6.0\refint\App.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\obj\Debug\net6.0\App.pdb
 C:\Users\Sadiq\Desktop\Api-Project\App\obj\Debug\net6.0\App.genruntimeconfig.cache
 C:\Users\Sadiq\Desktop\Api-Project\App\obj\Debug\net6.0\ref\App.dll
-C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\FluentValidation.dll
-C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
-C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
-C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
-C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
-C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Newtonsoft.Json.dll
-C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

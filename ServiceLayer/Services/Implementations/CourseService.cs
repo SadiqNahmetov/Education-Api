@@ -41,8 +41,8 @@ namespace ServiceLayer.Services.Implementations
                 {
                     var courseAuthor = new CourseAuthor
                     {
-                        Course = mapCourse,
-                        Author = author
+                        CourseId = mapCourse.Id,
+                        AuthorId = author.Id
                     };
                     mapCourse.CourseAuthors.Add(courseAuthor);
                 }
@@ -70,11 +70,14 @@ namespace ServiceLayer.Services.Implementations
         }
 
 
+
+
+
         public async Task UpdateAsync(int id, CourseUpdateDto courseUpdateDto)
         {
             if (courseUpdateDto.AuthorIds != null && courseUpdateDto.AuthorIds.Any())
             {
-                var authors = await _courseRepository.FindAllByExpression(a => courseUpdateDto.AuthorIds.Contains(a.Id));
+                var authors = await _authorRepository.FindAllByExpression(a => courseUpdateDto.AuthorIds.Contains(a.Id));
 
                 var dbCourse = await _courseRepository.GetWithAuthorsAndStudentsAsync(id);
 
@@ -101,7 +104,6 @@ namespace ServiceLayer.Services.Implementations
                 throw new Exception("You must select at least one author.");
             }
         }
-
 
 
         public async Task DeleteAsync(int id)

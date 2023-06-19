@@ -59,19 +59,17 @@ namespace App.Controllers
 
 
         [HttpPut, Route("{id}")]
-
-        public async Task<IActionResult> Update([FromRoute] [Required]int  id, [FromForm] CourseUpdateDto courseUpdateDto)
+        public async Task<IActionResult> Update([FromRoute][Required] int id, [FromForm] CourseUpdateDto courseUpdateDto)
         {
             try
             {
                 await _courseService.UpdateAsync(id, courseUpdateDto);
+
                 return Ok();
-
             }
-            catch (NullReferenceException)
+            catch (Exception)
             {
-
-                return BadRequest(new { ErrorMessage = "Not Update" });
+                return BadRequest(new { ErrorMessage = "Not Updated" });
             }
         }
 

@@ -1,29 +1,23 @@
 ﻿using DomainLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Data;
+using RepositoryLayer.Repositories.Imlementations;
 using RepositoryLayer.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RepositoryLayer.Repositories.Imlementations
+
+namespace RepositoryLayer.Repositories.Implementations
 {
     public class CourseRepository : Repository<Course>, ICourseRepository
     {
         private readonly AppDbContext _context;
         private readonly DbSet<Course> _course;
-        private readonly DbSet<CourseAuthor>_courseAuthors;
-
+        private readonly DbSet<CourseAuthor> _courseAuthors;
 
         public CourseRepository(AppDbContext context) : base(context)
         {
             _context = context;
             _course = _context.Set<Course>();
             _courseAuthors = _context.Set<CourseAuthor>();
-
-
         }
 
         public async Task<Course> GetWithAuthorsAndStudentsAsync(int id)
@@ -39,7 +33,6 @@ namespace RepositoryLayer.Repositories.Imlementations
             return course;
         }
 
-
         public async Task<List<Course>> GetAllWithAuthorsAndStudentsAsync()
         {
             var courses = await _course
@@ -51,7 +44,6 @@ namespace RepositoryLayer.Repositories.Imlementations
             return courses;
         }
 
-
         public async Task DeleteCourseAuthor(List<CourseAuthor> courseAuthors)
         {
             foreach (var courseAuthor in courseAuthors)
@@ -61,12 +53,5 @@ namespace RepositoryLayer.Repositories.Imlementations
                 await _context.SaveChangesAsync();
             }
         }
-
-
-
-
-
-
-
     }
 }
