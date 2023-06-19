@@ -2,6 +2,7 @@
 using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Slider;
+using ServiceLayer.Helpers;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,13 @@ namespace ServiceLayer.Services.Implementations
 
         public async Task CreateAsync(SliderCreateDto sliderCreateDto)
         {
-                await _repo.CreateAsync(_mapper.Map<Slider>(sliderCreateDto));
+
+            var mapSlider = _mapper.Map<Slider>(sliderCreateDto);
+
+            mapSlider.Image = await sliderCreateDto.Photo.GetBytes();
+
+            await _repo.CreateAsync(mapSlider);
+
         }
 
         public async Task DeleteAsync(int id)
@@ -56,12 +63,13 @@ namespace ServiceLayer.Services.Implementations
 
             return res;
         }
-
         public async Task UpdateAsync(int id, SliderUpdateDto sliderUpdateDto)
         {
             var dbSlider = await _repo.GetAsync(id);
 
-            _mapper.Map(sliderUpdateDto, dbSlider);
+            var mapSlider = _mapper.Map(sliderUpdateDto, dbSlider);
+
+            mapSlider.Image = await sliderUpdateDto.Photo.GetBytes();
 
             await _repo.UpdateAsync(dbSlider);
         }

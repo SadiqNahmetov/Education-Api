@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Repositories.Interfaces;
+using ServiceLayer.DTOs.About;
 using ServiceLayer.DTOs.Header;
 using ServiceLayer.Services.Implementations;
 using ServiceLayer.Services.Interfaces;
@@ -25,7 +26,7 @@ namespace App.Controllers
 
              return Ok();
         }
-
+    
         [HttpGet]
         public async Task<IActionResult> GetById([Required] int id)
         {
@@ -43,18 +44,17 @@ namespace App.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([Required][FromRoute]int id, [FromRoute] HeaderUpdateDto headerUpdateDto)
+        public async Task<IActionResult> Update([FromRoute][Required] int id, [FromForm] HeaderUpdateDto headerUpdateDto)
         {
             try
             {
                 await _headerService.UpdateAsync(id, headerUpdateDto);
-                return Ok();
 
+                return Ok(headerUpdateDto);
             }
-            catch (NullReferenceException)
+            catch (Exception)
             {
-
-                return NotFound();
+                return BadRequest(new { ErrorMessage = "Not Updated" });
             }
         }
 

@@ -49,9 +49,8 @@ namespace App.Controllers
 
             return Ok();
         }
-
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([Required][FromRoute] int id, [FromForm] SliderUpdateDto sliderUpdateDto)
+        public async Task<IActionResult> Update([FromRoute][Required] int id, [FromForm] SliderUpdateDto sliderUpdateDto)
         {
             try
             {
@@ -59,11 +58,13 @@ namespace App.Controllers
 
                 return Ok(sliderUpdateDto);
             }
-            catch (NullReferenceException)
+            catch (Exception)
             {
-                return NotFound();  
+
+                return BadRequest(new { ErrorMessage = "Not Updated" });
             }
         }
+
 
     }
 }

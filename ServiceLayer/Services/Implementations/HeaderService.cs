@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
 using RepositoryLayer.Repositories.Interfaces;
+using ServiceLayer.DTOs.About;
 using ServiceLayer.DTOs.Header;
 using ServiceLayer.DTOs.Slider;
+using ServiceLayer.Helpers;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,21 +28,24 @@ namespace ServiceLayer.Services.Implementations
         }
 
 
+
         public async Task CreateAsync(HeaderCreateDto headerCreateDto)
         {
-           if (! await _repo.IsExsist(m=>m.Title == headerCreateDto.Title)) 
+            if (!await _repo.IsExsist(a => a.Title == headerCreateDto.Title))
             {
-                var mapData = _mapper.Map<Header>(headerCreateDto);
+                var mapHeader = _mapper.Map<Header>(headerCreateDto);
 
-                await _repo.CreateAsync(mapData);
+                mapHeader.Image = await headerCreateDto.Photo.GetBytes();
+
+                await _repo.CreateAsync(mapHeader);
             }
             else
             {
-                throw new Exception("Header is alerdy exsist");
+                throw new Exception("Header is already exsist");
             }
         }
 
-    
+
 
         public async Task<List<HeaderListDto>> GetAllAsync()
         {
@@ -58,14 +63,16 @@ namespace ServiceLayer.Services.Implementations
             return result;
         }
 
+
         public async Task UpdateAsync(int id, HeaderUpdateDto headerUpdateDto)
         {
-           var dbHeader = await _repo.GetAsync(id);
+            var dbHeader = await _repo.GetAsync(id);
 
-            _mapper.Map(headerUpdateDto, dbHeader);
+            var mapHeader = _mapper.Map(headerUpdateDto, dbHeader);
+
+            mapHeader.Image = await headerUpdateDto.Photo.GetBytes();
 
             await _repo.UpdateAsync(dbHeader);
-
         }
 
         public async Task DeleteAsync(int id)
