@@ -16,13 +16,15 @@ namespace ServiceLayer.Services.Implementations
     {
         private readonly ICourseRepository _courseRepository;
         private readonly IAuthorRepository _authorRepository;
+        private readonly ICourseAuthorRepository _courseAuthorRepository;
         private readonly IMapper _mapper;
 
-        public CourseService(ICourseRepository courseRepository, IAuthorRepository authorRepository, IMapper mapper)
+        public CourseService(ICourseRepository courseRepository, IAuthorRepository authorRepository, IMapper mapper, ICourseAuthorRepository courseAuthorRepository)
         {
             _courseRepository = courseRepository;
             _authorRepository = authorRepository;
             _mapper = mapper;
+            _courseAuthorRepository = courseAuthorRepository;
         }
 
         public async Task CreateAsync(CourseCreateDto courseCreateDto)
@@ -81,7 +83,7 @@ namespace ServiceLayer.Services.Implementations
 
                 var dbCourse = await _courseRepository.GetWithAuthorsAndStudentsAsync(id);
 
-                await _courseRepository.DeleteCourseAuthor(dbCourse.CourseAuthors.ToList());
+                await _courseAuthorRepository.DeleteList(dbCourse.CourseAuthors.ToList());
 
                 foreach (var author in authors)
                 {

@@ -106,19 +106,15 @@ namespace ServiceLayer.Mappings
 
 
             CreateMap<Author, AuthorDto>()
-                .ForMember(dest => dest.CourseName, opt => opt.MapFrom(a => a.CourseAuthors
-                .Where(ca => ca.AuthorId == a.Id).Select(ca => ca.Course.Name)))
-                .ReverseMap();
-
+                 .ForMember(dest => dest.CourseName, opt => opt.MapFrom(a => a.CourseAuthors.Where(ca => ca.AuthorId == a.Id).Select(ca => ca.Course.Name)))
+                 .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
+                 .ReverseMap();
             CreateMap<Author, AuthorListDto>()
-                .ForMember(dest => dest.CourseTitle, opt => opt.MapFrom(a => a.CourseAuthors
-                .Where(ca => ca.CourseId == a.Id)
-                .Select(ca => ca.Course.Name)));
-
-            CreateMap<Author, AuthorCreateDto>()
-                .ForMember(dest => dest.Photo, opt => opt.MapFrom(s=> Convert.ToBase64String(s.Image)))
-                .ForMember(dest => dest.FullName, opt => opt.MapFrom(s => s.Name))
+                .ForMember(dest => dest.CourseName, opt => opt.MapFrom(a => a.CourseAuthors.Where(ca => ca.AuthorId == a.Id).Select(ca => ca.Course.Name)))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(s => Convert.ToBase64String(s.Image)))
                 .ReverseMap();
+            CreateMap<Author, AuthorCreateDto>().ReverseMap();
+            CreateMap<Author, AuthorUpdateDto>().ReverseMap();
 
 
             CreateMap<Student, StudentDto>()

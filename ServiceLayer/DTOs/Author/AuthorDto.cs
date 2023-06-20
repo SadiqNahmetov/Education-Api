@@ -13,6 +13,6 @@ namespace ServiceLayer.DTOs.Author
         public string? Name { get; set; }
         public string? Position { get; set; }
         public List<string>? CourseName { get; set; }
-        public List<CourseAuthor>? CourseAuthors { get; set; }
+        
     }
 }

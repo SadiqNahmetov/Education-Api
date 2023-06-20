@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Common;
+using DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,10 @@ namespace RepositoryLayer.Repositories.Interfaces
 
         Task<bool> IsExsist(Expression<Func<T, bool>> expression);
 
-       
+        Task DeleteList(List<T> entities);
+
+
+
+
     }
 }

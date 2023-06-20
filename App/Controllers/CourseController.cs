@@ -74,5 +74,20 @@ namespace App.Controllers
         }
 
 
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([Required] int id)
+        {
+            try
+            {
+                await _courseService.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }

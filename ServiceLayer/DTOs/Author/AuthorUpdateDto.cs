@@ -16,6 +16,9 @@ namespace ServiceLayer.DTOs.Author
 
         public string? Position { get; set; }
 
-        public ICollection<CourseAuthor>? CourseAuthors { get; set; }
+        public List<int>? CourseIds { get; set; }
+
+        
+
     }
 }

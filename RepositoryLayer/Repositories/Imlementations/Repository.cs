@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Common;
+using DomainLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Data;
 using RepositoryLayer.Repositories.Interfaces;
@@ -69,6 +70,19 @@ namespace RepositoryLayer.Repositories.Imlementations
             return await _entities.AnyAsync(expression);
 
         }
+
+
+
+        public async Task DeleteList(List<T> entity)
+        {
+            foreach (var courseAuthor in entity)
+            {
+                _entities.Remove(courseAuthor);
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
     }
 
 
