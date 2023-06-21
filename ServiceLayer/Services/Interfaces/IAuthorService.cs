@@ -17,5 +17,8 @@ namespace ServiceLayer.Services.Interfaces
 
         Task DeleteAsync(int id);
 
+        Task SoftDeleteAsync(int id);
+
+
     }
 }

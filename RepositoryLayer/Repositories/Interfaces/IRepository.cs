@@ -16,11 +16,14 @@ namespace RepositoryLayer.Repositories.Interfaces
         Task CreateAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
+
+        Task SoftDelete(T entity);
+        Task DeleteList(List<T> entities);
         Task<List<T>> FindAllByExpression(Expression<Func<T, bool>> expression);
 
         Task<bool> IsExsist(Expression<Func<T, bool>> expression);
 
-        Task DeleteList(List<T> entities);
+      
 
 
 

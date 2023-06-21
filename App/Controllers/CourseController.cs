@@ -16,6 +16,9 @@ namespace App.Controllers
             _courseService = courseService;
         }
 
+
+
+
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CourseCreateDto courseCreateDto)
         {
@@ -58,6 +61,22 @@ namespace App.Controllers
         }
 
 
+
+        [HttpGet]
+        public async Task<IActionResult> Search([Required] string search)
+        {
+            try
+            {
+                return Ok(await _courseService.SearchAsync(search));
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound("The word you were looking for was not found!");
+            }
+        }
+
+
+
         [HttpPut, Route("{id}")]
         public async Task<IActionResult> Update([FromRoute][Required] int id, [FromForm] CourseUpdateDto courseUpdateDto)
         {
@@ -84,7 +103,7 @@ namespace App.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (NullReferenceException)
             {
                 return NotFound();
             }

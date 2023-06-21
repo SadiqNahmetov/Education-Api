@@ -63,8 +63,16 @@ namespace App.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete([Required] int id)
         {
-            await _headerService.DeleteAsync(id);
-            return Ok();
+            try
+            {
+                await _headerService.DeleteAsync(id);
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
+
+                return NotFound();
+            }
 
         }
     

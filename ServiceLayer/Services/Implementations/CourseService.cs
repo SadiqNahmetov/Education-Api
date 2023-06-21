@@ -112,5 +112,12 @@ namespace ServiceLayer.Services.Implementations
         {
             await _courseRepository.DeleteAsync(await _courseRepository.GetAsync(id));
         }
+
+        public async Task<List<CourseListDto>> SearchAsync(string searchText)
+        {
+            return  _mapper.Map<List<CourseListDto>>(await _courseRepository
+                .FindAllByExpression(m => m.Name.Contains(searchText)));
+        }
     }
 }
+

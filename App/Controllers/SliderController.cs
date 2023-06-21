@@ -42,13 +42,7 @@ namespace App.Controllers
             return Ok(result);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete([Required]int id)
-        {
-            await _sliderService.DeleteAsync(id);
-
-            return Ok();
-        }
+     
         [HttpPut, Route("{id}")]
         public async Task<IActionResult> Update([FromRoute][Required] int id, [FromForm] SliderUpdateDto sliderUpdateDto)
         {
@@ -65,6 +59,20 @@ namespace App.Controllers
             }
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> Delete([Required] int id)
+        {
+            try
+            {
+                await _sliderService.DeleteAsync(id);
 
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
+
+                return NotFound();
+            }
+        }
     }
 }

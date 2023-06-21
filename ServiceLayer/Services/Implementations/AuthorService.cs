@@ -114,5 +114,12 @@ namespace ServiceLayer.Services.Implementations
         {
             await _authorRepository.DeleteAsync(await _authorRepository.GetAsync(id));
         }
+
+        public async Task SoftDeleteAsync(int id)
+        {
+           var author = await _authorRepository.GetAsync(id);
+
+            await _authorRepository.SoftDelete(author);
+        }
     }
 }
