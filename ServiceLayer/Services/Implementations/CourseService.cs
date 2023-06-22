@@ -108,15 +108,22 @@ namespace ServiceLayer.Services.Implementations
         }
 
 
-        public async Task DeleteAsync(int id)
-        {
-            await _courseRepository.DeleteAsync(await _courseRepository.GetAsync(id));
-        }
 
         public async Task<List<CourseListDto>> SearchAsync(string searchText)
         {
             return  _mapper.Map<List<CourseListDto>>(await _courseRepository
                 .FindAllByExpression(m => m.Name.Contains(searchText)));
+        }
+
+
+        public async Task DeleteAsync(int id)
+        {
+            await _courseRepository.DeleteAsync(await _courseRepository.GetAsync(id));
+        }
+
+        public async Task SoftDeleteAsync(int id)
+        {
+            await _courseRepository.SoftDelete(await _courseRepository.GetAsync(id));
         }
     }
 }

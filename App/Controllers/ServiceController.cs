@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.Banner;
 using ServiceLayer.DTOs.Service;
+using ServiceLayer.Services.Implementations;
 using ServiceLayer.Services.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
@@ -77,6 +78,21 @@ namespace App.Controllers
             catch (NullReferenceException)
             {
 
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SoftDelete([Required] int id)
+        {
+            try
+            {
+                await _serviceService.SoftDeleteAsync(id);
+
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
                 return NotFound();
             }
         }

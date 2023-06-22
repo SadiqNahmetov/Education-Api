@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.About;
+using ServiceLayer.Services.Implementations;
 using ServiceLayer.Services.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
@@ -80,6 +81,23 @@ namespace App.Controllers
             try
             {
                 await _aboutService.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> SoftDelete([Required] int id)
+        {
+            try
+            {
+                await _aboutService.SoftDeleteAsync(id);
 
                 return Ok();
             }

@@ -13,6 +13,7 @@ namespace ServiceLayer.Services.Interfaces
         Task<List<AboutListDto>> GetAllAsync();
         Task CreateAsync(AboutCreateDto aboutCreateDto);
         Task DeleteAsync(int id);
+        Task SoftDeleteAsync(int id);
         Task UpdateAsync(int id, AboutUpdateDto aboutUpdateDto);
     }
 }

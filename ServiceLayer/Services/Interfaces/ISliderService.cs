@@ -12,6 +12,8 @@ namespace ServiceLayer.Services.Interfaces
 
         Task UpdateAsync(int id, SliderUpdateDto slider);
         Task DeleteAsync(int id);
+        Task SoftDeleteAsync(int id);
+
 
 
     }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
+using RepositoryLayer.Repositories.Imlementations;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Slider;
 using ServiceLayer.Helpers;
@@ -38,13 +39,6 @@ namespace ServiceLayer.Services.Implementations
 
         }
 
-        public async Task DeleteAsync(int id)
-        {
-            var slider = await _repo.GetAsync(id);
-
-            await _repo.DeleteAsync(slider);
-        }
-
         public async Task<List<SliderListDto>> GetAllAsync()
         {
             var model = await _repo.GetAllAsync();
@@ -72,6 +66,18 @@ namespace ServiceLayer.Services.Implementations
             mapSlider.Image = await sliderUpdateDto.Photo.GetBytes();
 
             await _repo.UpdateAsync(dbSlider);
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var slider = await _repo.GetAsync(id);
+
+            await _repo.DeleteAsync(slider);
+        }
+
+        public async Task SoftDeleteAsync(int id)
+        {
+            await _repo.SoftDelete(await _repo.GetAsync(id));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
+using RepositoryLayer.Repositories.Imlementations;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Title;
 using ServiceLayer.Services.Interfaces;
@@ -36,12 +37,6 @@ namespace ServiceLayer.Services.Implementations
             }
         }
 
-        public async Task DeleteAsync(int id)
-        {
-            var title = await _repo.GetAsync(id);
-
-            await _repo.DeleteAsync(title);
-        }
 
         public async Task<List<TitleListDto>> GetAllAsync()
         {
@@ -70,6 +65,17 @@ namespace ServiceLayer.Services.Implementations
             await _repo.UpdateAsync(dbTitle);
         }
 
-       
+        public async Task DeleteAsync(int id)
+        {
+            var title = await _repo.GetAsync(id);
+
+            await _repo.DeleteAsync(title);
+        }
+
+        public async Task SoftDeleteAsync(int id)
+        {
+            await _repo.SoftDelete(await _repo.GetAsync(id));
+        }
+
     }
 }

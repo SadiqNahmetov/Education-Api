@@ -89,7 +89,7 @@ namespace RepositoryLayer.Repositories.Imlementations
         {
            T? model =  await _entities.FirstOrDefaultAsync(m => m.Id == entity.Id);
 
-            if (model != null) throw new NullReferenceException();
+            if (model == null) throw new NullReferenceException();
 
             model.SoftDeleted = true;
 

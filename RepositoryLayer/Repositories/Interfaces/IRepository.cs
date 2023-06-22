@@ -18,6 +18,7 @@ namespace RepositoryLayer.Repositories.Interfaces
         Task DeleteAsync(T entity);
 
         Task SoftDelete(T entity);
+
         Task DeleteList(List<T> entities);
         Task<List<T>> FindAllByExpression(Expression<Func<T, bool>> expression);
 

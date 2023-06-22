@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
+using RepositoryLayer.Repositories.Imlementations;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.About;
 using ServiceLayer.Helpers;
@@ -69,6 +70,11 @@ namespace ServiceLayer.Services.Implementations
         public async Task DeleteAsync(int id)
         {
             await _repo.DeleteAsync(await _repo.GetAsync(id));
+        }
+
+        public async Task SoftDeleteAsync(int id)
+        {
+            await _repo.SoftDelete(await _repo.GetAsync(id));
         }
     }
 }

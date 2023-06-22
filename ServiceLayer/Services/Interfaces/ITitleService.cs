@@ -18,5 +18,8 @@ namespace ServiceLayer.Services.Interfaces
         Task UpdateAsync(int id, TitleUpdateDto titleUpdate);
 
         Task DeleteAsync(int id);
+
+        Task SoftDeleteAsync(int id);
+
     }
 }
