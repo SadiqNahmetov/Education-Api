@@ -10,9 +10,9 @@ namespace ServiceLayer.DTOs.Student
     public class StudentCreateDto
     {
         public IFormFile? Photo { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public decimal Price { get; set; }
-        public List<int>? AuthorIds { get; set; }
+        public string? FullName { get; set; }
+        public int Age { get; set; }
+        public string? Info { get; set; }
+        public int CourseId { get; set; }
     }
 }

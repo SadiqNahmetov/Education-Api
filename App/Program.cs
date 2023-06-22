@@ -67,6 +67,10 @@ builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<ICourseAuthorRepository, CourseAuthorRepository>();
 
 
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "mycors",
