@@ -45,5 +45,54 @@ namespace App.Controllers
                 return NotFound("Please enter a valid Id!");
             }
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                return Ok(await _studentService.GetAllAsync());
+            }
+            catch (Exception)
+            {
+                return NotFound("No records found!");
+            }
+        }
+
+
+
+
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([Required] int id)
+        {
+            try
+            {
+                await _studentService.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> SoftDelete([Required] int id)
+        {
+            try
+            {
+                await _studentService.SoftDeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }
