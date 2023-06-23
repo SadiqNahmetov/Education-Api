@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
+using RepositoryLayer.Repositories.Imlementations;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Banner;
 using ServiceLayer.DTOs.Contact;
@@ -45,6 +46,8 @@ namespace ServiceLayer.Services.Implementations
 
         }
 
+  
+
         public async Task UpdateAsync(int id, ContactUpdateDto contactUpdateDto)
         {
             var dbContact = await _repo.GetAsync(id);
@@ -54,6 +57,9 @@ namespace ServiceLayer.Services.Implementations
             await _repo.UpdateAsync(dbContact);
         }
 
-       
+        public async Task SoftDeleteAsync(int id)
+        {
+            await _repo.SoftDelete(await _repo.GetAsync(id));
+        }
     }
 }
