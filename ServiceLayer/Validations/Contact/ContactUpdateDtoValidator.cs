@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceLayer.Vakidations.Contact
+namespace ServiceLayer.Validations.Contact
 {
     public class ContactUpdateDtoValidator : AbstractValidator<ContactUpdateDto>
     {
