@@ -4,6 +4,7 @@ using RepositoryLayer.Repositories.Imlementations;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.Header;
 using ServiceLayer.DTOs.Service;
+using ServiceLayer.Helpers;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,17 +27,20 @@ namespace ServiceLayer.Services.Implementations
 
 
 
+
         public async Task CreateAsync(ServiceCreateDto serviceCreateDto)
         {
-            if (!await _repo.IsExsist(m => m.Name == serviceCreateDto.Name))
+            if (!await _repo.IsExsist(s => s.Name == serviceCreateDto.Name))
             {
-                var mapData = _mapper.Map<Service>(serviceCreateDto);
+                var mapService = _mapper.Map<Service>(serviceCreateDto);
 
-                await _repo.CreateAsync(mapData);
+                mapService.Image = await serviceCreateDto.Photo.GetBytes();
+
+                await _repo.CreateAsync(mapService);
             }
             else
             {
-                throw new Exception("Service is alerdy exsist");
+                throw new Exception("Service is already exsist");
             }
         }
 
@@ -61,13 +65,14 @@ namespace ServiceLayer.Services.Implementations
 
         public async Task UpdateAsync(int id, ServiceUpdateDto serviceUpdateDto)
         {
-            var dbHeader = await _repo.GetAsync(id);
+            var dbService = await _repo.GetAsync(id);
 
-            _mapper.Map(serviceUpdateDto, dbHeader);
+            var mapService = _mapper.Map(serviceUpdateDto, dbService);
 
-            await _repo.UpdateAsync(dbHeader);
+            mapService.Image = await serviceUpdateDto.Photo.GetBytes();
+
+            await _repo.UpdateAsync(dbService);
         }
-
 
         public async Task DeleteAsync(int id)
         {

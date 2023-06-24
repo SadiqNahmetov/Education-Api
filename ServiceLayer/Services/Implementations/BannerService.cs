@@ -56,16 +56,16 @@ namespace ServiceLayer.Services.Implementations
 
         public async Task UpdateAsync(int id, BannerUpdateDto bannerUpdateDto)
         {
-            var dbBaner = await _repo.GetAsync(id);
+            var dbbanner = await _repo.GetAsync(id);
 
-            var mapAbout = _mapper.Map(bannerUpdateDto, dbBaner);
+            var mapBanner = _mapper.Map(bannerUpdateDto, dbbanner);
 
-            mapAbout.Image = await bannerUpdateDto.Photo.GetBytes();
+            mapBanner.Image = await bannerUpdateDto.Photo.GetBytes();
 
-            await _repo.UpdateAsync(dbBaner);
-
-
+            await _repo.UpdateAsync(dbbanner);
         }
+
+
         public async Task DeleteAsync(int id)
         {
             await _repo.DeleteAsync(await _repo.GetAsync(id));

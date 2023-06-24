@@ -48,17 +48,18 @@ namespace App.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([Required] int id, [FromRoute] BannerUpdateDto bannerUpdateDto)
+        public async Task<IActionResult> Update([FromRoute][Required] int id, [FromForm] BannerUpdateDto bannerUpdateDto)
         {
             try
             {
                 await _bannerService.UpdateAsync(id, bannerUpdateDto);
-                return Ok();
-            }
-            catch (NullReferenceException)
-            {
 
-                return NotFound();
+                return Ok(bannerUpdateDto);
+
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { ErrorMessage = "Not Updated" });
             }
         }
 

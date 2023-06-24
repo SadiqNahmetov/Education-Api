@@ -17,13 +17,19 @@ namespace App.Controllers
             _serviceService = serviceService;
             _env = env;
         }
-
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] ServiceCreateDto serviceCreateDto)
         {
-            await _serviceService.CreateAsync(serviceCreateDto);
+            try
+            {
+                await _serviceService.CreateAsync(serviceCreateDto);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { ErrorMessage = "Not Created" });
+            }
         }
 
 
@@ -47,18 +53,19 @@ namespace App.Controllers
             return Ok(result);
         }
 
+
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> Update([Required][FromRoute] int id, [FromRoute] ServiceUpdateDto serviceUpdateDto)
+        public async Task<IActionResult> Update([Required][FromRoute] int id, [FromForm] ServiceUpdateDto serviceUpdateDto)
         {
             try
             {
                 await _serviceService.UpdateAsync(id, serviceUpdateDto);
+
                 return Ok();
             }
-            catch (NullReferenceException)
+            catch (Exception)
             {
-
-                return NotFound();
+                return BadRequest(new { ErrorMessage = "Not Updated" });
             }
         }
 

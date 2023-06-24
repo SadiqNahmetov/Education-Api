@@ -10,8 +10,6 @@ namespace ServiceLayer.DTOs.Banner
     public class BannerUpdateDto
     {
         public IFormFile? Photo { get; set; }
-
-
         public string? Title { get; set; }
     }
 }
