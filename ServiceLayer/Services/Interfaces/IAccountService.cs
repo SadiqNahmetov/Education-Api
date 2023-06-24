@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Services.Interfaces
 {
-    internal interface IAccountService
+    public interface IAccountService
     {
+
     }
 }
