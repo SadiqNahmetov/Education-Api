@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
 using ServiceLayer.DTOs.About;
+using ServiceLayer.DTOs.Account;
 using ServiceLayer.DTOs.Author;
 using ServiceLayer.DTOs.Banner;
 using ServiceLayer.DTOs.Contact;
@@ -127,6 +128,9 @@ namespace ServiceLayer.Mappings
                 .ReverseMap();
             CreateMap<Student, StudentCreateDto>().ReverseMap();
             CreateMap<Student, StudentUpdateDto>().ReverseMap();
+
+
+            CreateMap<RegisterDto, AppUser>().ReverseMap();
         }
     }
 }

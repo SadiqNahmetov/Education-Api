@@ -4,7 +4,7 @@ using ServiceLayer.DTOs.Banner;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.Services.Implementations;
 using ServiceLayer.Services.Interfaces;
-using ServiceLayer.Vakidations.Contact;
+using ServiceLayer.Validations.Contact;
 using System.ComponentModel.DataAnnotations;
 
 namespace App.Controllers
