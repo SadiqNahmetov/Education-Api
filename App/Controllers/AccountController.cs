@@ -14,30 +14,39 @@ namespace App.Controllers
             _accountService = accountService;
         }
 
+
         [HttpPost]
-        public async Task<ApiResponse> Register([FromForm] RegisterDto registerDto)
+        public async Task<IActionResult> Register([FromForm] RegisterDto registerDto)
         {
             try
             {
-                RegisterDtoValidator validator = new();
+                RegisterDtoValidator validator = new RegisterDtoValidator();
 
                 var validationResult = validator.Validate(registerDto);
 
                 if (!validationResult.IsValid)
                 {
-                    return new ApiResponse
+                    return BadRequest(new ApiResponse
                     {
                         Errors = validationResult.Errors.Select(m => m.ErrorMessage).ToList(),
-                        StatusMessage = "Faild"
-                    };
+                        StatusMessage = "Failed"
+                    });
                 }
 
-                return await _accountService.RegisterAsync(registerDto);
+                var response = await _accountService.RegisterAsync(registerDto);
+
+                if (response.Errors != null)
+                {
+                    return BadRequest(response);
+                }
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                return new ApiResponse { Errors = new List<string> { ex.Message } };
+                return BadRequest(new ApiResponse { Errors = new List<string> { ex.Message } });
             }
         }
+
     }
 }

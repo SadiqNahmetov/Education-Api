@@ -363,3 +363,4 @@ C:\Users\Sadiq\Desktop\Api-Project\App\obj\Debug\net6.0\App.pdb
 C:\Users\Sadiq\Desktop\Api-Project\App\obj\Debug\net6.0\App.genruntimeconfig.cache
 C:\Users\Sadiq\Desktop\Api-Project\App\obj\Debug\net6.0\ref\App.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

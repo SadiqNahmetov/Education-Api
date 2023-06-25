@@ -1,7 +1,9 @@
 using DomainLayer.Entities;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer.Data;
 using RepositoryLayer.Repositories.Imlementations;
 using RepositoryLayer.Repositories.Implementations;
@@ -9,7 +11,9 @@ using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.Mappings;
 using ServiceLayer.Services.Implementations;
 using ServiceLayer.Services.Interfaces;
+using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
+using System.Text;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,25 +57,26 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
             });
 
 
-//builder.Services
-//                .AddAuthentication(options =>
-//                {
-//                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-//                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//                })
-//                .AddJwtBearer(cfg =>
-//                {
-//                    cfg.RequireHttpsMetadata = false;
-//                    cfg.SaveToken = true;
-//                    cfg.TokenValidationParameters = new TokenValidationParameters
-//                    {
-//                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-//                        ValidAudience = builder.Configuration["Jwt:Audience"],
-//                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-//                        ClockSkew = TimeSpan.Zero // remove delay of token when expire
-//                    };
-//                });
+       JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
+
+                builder.Services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.RequireHttpsMetadata = false;
+                    cfg.SaveToken = true;
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+                        ClockSkew = TimeSpan.Zero // remove delay of token when expire
+                    };
+                });
 
 
 
