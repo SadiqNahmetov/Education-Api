@@ -9,6 +9,7 @@ namespace ServiceLayer.Helpers
 {
     public static class PasswordExtentions
     {
+
         public static bool HasValidPassword(string pw)
         {
             var lowercase = new Regex("[a-z]+");
@@ -18,5 +19,6 @@ namespace ServiceLayer.Helpers
 
             return (lowercase.IsMatch(pw) && uppercase.IsMatch(pw) && digit.IsMatch(pw) && symbol.IsMatch(pw));
         }
+
     }
 }

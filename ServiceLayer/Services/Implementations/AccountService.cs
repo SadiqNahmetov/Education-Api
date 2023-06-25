@@ -26,29 +26,24 @@ namespace ServiceLayer.Services.Implementations
 
 
 
+        public async Task<ApiResponse> RegisterAsync(RegisterDto registerDto)
+        {
+            var user = _mapper.Map<AppUser>(registerDto);
+
+            await _userManager.CreateAsync(user, registerDto.Password);
+
+            return new ApiResponse { Errors = null, StatusMessage = "Success" };
+
+        }
+
+
+
+
         public Task LoginAsync(LoginDto loginDto)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResponse> RegisterAsync(RegisterDto registerDto)
-        {
-            var user = _mapper.Map<AppUser>(registerDto);
-
-            IdentityResult result =  await _userManager.CreateAsync(user, registerDto.Password);
-
-            if (!result.Succeeded)
-            {
-                ApiResponse apiResponse = new()
-                {
-                    Errors = result.Errors.Select(m => m.Description).ToList(),
-                    StatusMessage = "Failed"
-                };
-
-                return apiResponse;
-            }
-
-            return new ApiResponse { Errors = null, StatusMessage = "Success" };
-        }
+  
     }
 }

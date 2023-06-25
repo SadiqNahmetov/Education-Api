@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.Account;
 using ServiceLayer.Services.Interfaces;
+using ServiceLayer.Validations.Account;
 
 namespace App.Controllers
 {
@@ -14,9 +15,29 @@ namespace App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+        public async Task<ApiResponse> Register([FromForm] RegisterDto registerDto)
         {
-            return Ok(await _accountService.RegisterAsync(registerDto));
+            try
+            {
+                RegisterDtoValidator validator = new();
+
+                var validationResult = validator.Validate(registerDto);
+
+                if (!validationResult.IsValid)
+                {
+                    return new ApiResponse
+                    {
+                        Errors = validationResult.Errors.Select(m => m.ErrorMessage).ToList(),
+                        StatusMessage = "Faild"
+                    };
+                }
+
+                return await _accountService.RegisterAsync(registerDto);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse { Errors = new List<string> { ex.Message } };
+            }
         }
     }
 }

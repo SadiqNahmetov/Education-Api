@@ -9,7 +9,8 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IAccountService
     {
+        Task<ApiResponse> RegisterAsync(RegisterDto registerDto);
         Task LoginAsync (LoginDto loginDto);
-        Task<ApiResponse> RegisterAsync (RegisterDto registerDto);
+     
     }
 }
