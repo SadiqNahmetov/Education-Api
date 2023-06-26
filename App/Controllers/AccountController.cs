@@ -48,5 +48,19 @@ namespace App.Controllers
             }
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> Login([FromForm] LoginDto loginDto)
+        {
+            try
+            {
+                return Ok(await _accountService.LoginAsync(loginDto));
+            }
+            catch (Exception)
+            {
+                return BadRequest("UserName or Password wrong!");
+            }
+        }
+
     }
 }

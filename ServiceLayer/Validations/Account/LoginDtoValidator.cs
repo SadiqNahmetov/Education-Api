@@ -13,9 +13,9 @@ namespace ServiceLayer.Validations.Account
     {
         public LoginDtoValidator()
         {
-            RuleFor(e => e.Email).NotNull().NotEmpty().MaximumLength(50).EmailAddress();
-            RuleFor(u => u.Password).Length(5, 12).Must(u => PasswordExtentions.HasValidPassword(u));
-             
+            RuleFor(u => u.Email).NotNull().NotEmpty().MaximumLength(50).EmailAddress();
+            RuleFor(u => u.Password).NotNull().NotEmpty().Length(6, 12).Must(u => PasswordExtentions.HasValidPassword(u));
+
         }
 
     }
