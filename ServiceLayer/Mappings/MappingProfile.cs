@@ -131,6 +131,7 @@ namespace ServiceLayer.Mappings
 
 
             CreateMap<RegisterDto, AppUser>().ReverseMap();
+            CreateMap<LoginDto, AppUser>().ReverseMap();
         }
     }
 }

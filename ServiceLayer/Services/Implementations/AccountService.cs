@@ -19,18 +19,36 @@ namespace ServiceLayer.Services.Implementations
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
-        private readonly IConfiguration _config;
 
-        public AccountService(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper,IConfiguration config)
+
+        public AccountService(UserManager<AppUser> userManager,
+               RoleManager<IdentityRole> roleManager,
+               ITokenService tokenService,
+               IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _tokenService = tokenService;
             _mapper = mapper;
-            _config = config;
+
         }
 
 
+
+        public async Task<string?> LoginAsync(LoginDto loginDto)
+        {
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+
+            if (!await _userManager.CheckPasswordAsync(user, loginDto.Password)) return null;
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            string token = _tokenService.GenerateJwtToken(user.Email, user.UserName, (List<string>)roles);
+
+            return token;
+        }
 
 
         public async Task<ApiResponse> RegisterAsync(RegisterDto registerDto)
@@ -54,43 +72,6 @@ namespace ServiceLayer.Services.Implementations
         }
 
 
-        private string GenerateJwtToken(string username, List<string> roles)
-        {
-            var claims = new List<Claim>
-        {
-            new Claim(JwtRegisteredClaimNames.Sub, username),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.NameIdentifier, username)
-        };
 
-            roles.ForEach(role =>
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            });
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(_config["Jwt:ExpireDays"]));
-
-            var token = new JwtSecurityToken(
-                _config["Jwt:Issuer"],
-                _config["Jwt:Audience"],
-                claims,
-                expires: expires,
-                signingCredentials: creds
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-
-
-
-        public Task LoginAsync(LoginDto loginDto)
-        {
-            throw new NotImplementedException();
-        }
-
-  
     }
 }
