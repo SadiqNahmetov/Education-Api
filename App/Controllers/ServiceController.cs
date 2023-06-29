@@ -37,9 +37,14 @@ namespace App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetById([Required] int id)
         {
-            var result = await _serviceService.GetAsync(id);
-
-            return Ok(result);
+            try
+            {
+                return Ok(await _serviceService.GetAsync(id));
+            }
+            catch (Exception)
+            {
+                return NotFound("Please enter a valid Id!");
+            }
         }
 
 
@@ -48,9 +53,14 @@ namespace App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _serviceService.GetAllAsync();
-
-            return Ok(result);
+            try
+            {
+                return Ok(await _serviceService.GetAllAsync());
+            }
+            catch (Exception)
+            {
+                return NotFound("No records found!");
+            }
         }
 
 

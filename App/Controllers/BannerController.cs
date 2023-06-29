@@ -21,9 +21,18 @@ namespace App.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] BannerCreateDto bannerCreateDto)
         {
-            await _bannerService.CreateAsync(bannerCreateDto);
+            try
+            {
+                await _bannerService.CreateAsync(bannerCreateDto);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest(new { ErrorMessage = "Not Created" });
+            }
+          
         }
 
 
@@ -31,9 +40,14 @@ namespace App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetById([Required] int id)
         {
-            var result = await _bannerService.GetAsync(id);
-
-            return Ok(result);
+            try
+            {
+                return Ok(await _bannerService.GetAsync(id));
+            }
+            catch (Exception)
+            {
+                return NotFound("Please enter a valid Id!");
+            }
         }
 
 
@@ -42,9 +56,14 @@ namespace App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _bannerService.GetAllAsync();
-
-            return Ok(result);
+            try
+            {
+                return Ok(await _bannerService.GetAllAsync());
+            }
+            catch (Exception)
+            {
+                return NotFound("No records found!");
+            }
         }
 
         [HttpPut, Route("{id}")]

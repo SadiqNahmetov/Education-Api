@@ -22,9 +22,16 @@ namespace App.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] AboutCreateDto aboutCreateDto)
         {
-            await _aboutService.CreateAsync(aboutCreateDto);
+            try
+            {
+                await _aboutService.CreateAsync(aboutCreateDto);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { ErrorMessage = "Not Created" });
+            }
         }
 
 
