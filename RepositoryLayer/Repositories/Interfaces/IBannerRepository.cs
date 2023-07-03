@@ -1,5 +1,5 @@
 ﻿using DomainLayer.Entities;
-using RepositoryLayer.Repositories.Imlementations;
+using RepositoryLayer.Repositories.Implementations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

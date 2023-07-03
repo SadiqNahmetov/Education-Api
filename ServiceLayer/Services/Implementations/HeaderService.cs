@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
-using RepositoryLayer.Repositories.Imlementations;
+using RepositoryLayer.Repositories.Implementations;
 using RepositoryLayer.Repositories.Interfaces;
 using ServiceLayer.DTOs.About;
 using ServiceLayer.DTOs.Header;
