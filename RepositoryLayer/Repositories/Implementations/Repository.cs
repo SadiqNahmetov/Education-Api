@@ -87,9 +87,7 @@ namespace RepositoryLayer.Repositories.Implementations
 
         public async Task SoftDelete(T entity)
         {
-           T? model =  await _entities.FirstOrDefaultAsync(m => m.Id == entity.Id);
-
-            if (model == null) throw new NullReferenceException();
+            T? model = await _entities.FirstOrDefaultAsync(e => e.Id == entity.Id) ?? throw new NullReferenceException();
 
             model.SoftDeleted = true;
 
