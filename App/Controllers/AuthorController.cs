@@ -59,6 +59,19 @@ namespace App.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Search(string? search)
+        {
+            try
+            {
+                return Ok(await _authorService.SearchAsync(search));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPut, Route("{id}")]
         public async Task<IActionResult> Update([Required][FromRoute] int id, [FromForm] AuthorUpdateDto authorUpdateDto)
         {

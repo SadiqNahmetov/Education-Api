@@ -14,7 +14,7 @@ namespace ServiceLayer.Services.Interfaces
         Task CreateAsync(AuthorCreateDto authorCreateDto);
 
         Task UpdateAsync(int id, AuthorUpdateDto authorUpdateDto);
-
+        Task<List<AuthorListDto>> SearchAsync(string? searchText);
         Task DeleteAsync(int id);
 
         Task SoftDeleteAsync(int id);

@@ -119,5 +119,16 @@ namespace ServiceLayer.Services.Implementations
         {
             await _authorRepository.SoftDelete(await _authorRepository.GetAsync(id));
         }
+
+        public async Task<List<AuthorListDto>> SearchAsync(string? searchText)
+        {
+            List<Author> searchAuthors = new();
+
+            searchAuthors = searchText != null
+                ? await _authorRepository.FindAllByExpression(a => a.Name.Contains(searchText))
+                : await _authorRepository.GetAllAsync();
+
+            return _mapper.Map<List<AuthorListDto>>(searchAuthors);
+        }
     }
 }
