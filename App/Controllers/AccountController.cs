@@ -62,5 +62,13 @@ namespace App.Controllers
             }
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRole([FromBody] RoleDto roleDto)
+        {
+            await _accountService.CreateRoleAsync(roleDto);
+            return Ok();
+        }
+
     }
 }

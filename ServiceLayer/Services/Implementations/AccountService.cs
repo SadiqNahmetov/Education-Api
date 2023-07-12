@@ -35,11 +35,16 @@ namespace ServiceLayer.Services.Implementations
 
         }
 
-
+        public async Task CreateRoleAsync(RoleDto roleDto)
+        {
+            await _roleManager.CreateAsync(new IdentityRole { Name = roleDto.Role });
+        }
 
         public async Task<string?> LoginAsync(LoginDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
+
+            if (user is null) return null;
 
             if (!await _userManager.CheckPasswordAsync(user, loginDto.Password)) return null;
 
@@ -56,6 +61,8 @@ namespace ServiceLayer.Services.Implementations
             var user = _mapper.Map<AppUser>(registerDto);
 
             IdentityResult result = await _userManager.CreateAsync(user, registerDto.Password);
+         
+            await _userManager.AddToRoleAsync(user, "User");
 
             if (!result.Succeeded)
             {
@@ -70,8 +77,8 @@ namespace ServiceLayer.Services.Implementations
 
             return new ApiResponse { Errors = null, StatusMessage = "Success" };
         }
-
-
+  
+        
 
     }
 }
