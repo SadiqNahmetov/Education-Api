@@ -11,6 +11,7 @@ namespace ServiceLayer.Services.Interfaces
     {
         Task<string?> LoginAsync(LoginDto loginDto);
         Task<ApiResponse> RegisterAsync(RegisterDto registerDto);
+        Task ConfirmEmailAsync(string userId, string token);
         Task CreateRoleAsync(RoleDto roleDto);
 
     }
