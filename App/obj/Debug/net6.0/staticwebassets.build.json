@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "EaUC/8Von80E+jSRNMWT1cr71qrjU3XMklF4Vts2GxU=",
+  "Hash": "xAM50hLD2iI+SqR2F9B2eDrKqbqXD75avZEiWOx97f8=",
   "Source": "App",
   "BasePath": "_content/App",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "App\\wwwroot",
+      "Source": "App",
+      "ContentRoot": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\App\\wwwroot\\",
+      "BasePath": "_content/App",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\App\\wwwroot\\Templates\\verify.html",
+      "SourceId": "App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\App\\wwwroot\\",
+      "BasePath": "_content/App",
+      "RelativePath": "Templates/verify.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Templates\\verify.html"
+    }
+  ]
 }

@@ -6,7 +6,8 @@ using MimeKit.Text;
 using MimeKit;
 using ServiceLayer.DTOs.Account;
 using ServiceLayer.Services.Interfaces;
-using System.Net.Mail;
+
+
 
 namespace ServiceLayer.Services.Implementations
 {
@@ -60,16 +61,25 @@ namespace ServiceLayer.Services.Implementations
             message.Body = new TextPart(TextFormat.Html) { Text = emailBody };
 
 
-            // send email
-            using var smtp = new SmtpClient();
+            //// send email
+            //using (var smtp = new MailKit.Net.Smtp.SmtpClient())
 
-            smtp.Connect(_configuration.GetSection("Smtp:Server").Value, int.Parse(_configuration.GetSection("Smtp:Port").Value), SecureSocketOptions.StartTls);
+            //smtp.Connect(_configuration.GetSection("Smtp:Server").Value, int.Parse(_configuration.GetSection("Smtp:Port").Value), SecureSocketOptions.StartTls);
 
-            smtp.Authenticate(_configuration.GetSection("Smtp:FromAddress").Value, _configuration.GetSection("Smtp:Password").Value);
+            //smpt.Authenticate(_configuration.GetSection("Smtp:FromAddress").Value, _configuration.GetSection("Smtp:Password").Value);
 
-            smtp.Send(message);
+            //smtp.Send(message);
 
-            smtp.Disconnect(true);
+            //smtp.Disconnect(true);
+            using (var smtp = new MailKit.Net.Smtp.SmtpClient())
+            {
+                // ... diğer kodlar ...
+                smtp.Connect(_configuration.GetSection("Smtp:Server").Value, int.Parse(_configuration.GetSection("Smtp:Port").Value), SecureSocketOptions.StartTls);
+                smtp.Authenticate(_configuration.GetSection("Smtp:FromAddress").Value, _configuration.GetSection("Smtp:Password").Value);
+                smtp.Send(message);
+                smtp.Disconnect(true);
+            }
+
         }
 
         public void ForgotPassword()
