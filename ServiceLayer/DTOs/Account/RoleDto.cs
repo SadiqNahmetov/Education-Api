@@ -10,6 +10,6 @@ namespace ServiceLayer.DTOs.Account
 
     public class RoleDto
     {
-        public string? Role { get; set; }
+        public string? RoleName { get; set; }
     }
 }

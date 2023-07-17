@@ -6,8 +6,7 @@ using MimeKit.Text;
 using MimeKit;
 using ServiceLayer.DTOs.Account;
 using ServiceLayer.Services.Interfaces;
-
-
+using MailKit.Net.Smtp;
 
 namespace ServiceLayer.Services.Implementations
 {
@@ -38,21 +37,21 @@ namespace ServiceLayer.Services.Implementations
             await _userManager.ConfirmEmailAsync(user, token);
         }
 
-   
+
 
         public void Register(RegisterDto registerDto, string link)
         {
             // create message
             var message = new MimeMessage();
 
-            message.From.Add(MailboxAddress.Parse(_configuration.GetSection("Smtp:FromAddress").Value));
+            message.From.Add(MailboxAddress.Parse(_configuration.GetSection("Smtp:Mail").Value));
 
             message.To.Add(MailboxAddress.Parse(registerDto.Email));
 
-            message.Subject = "Verify Email";
+            message.Subject = "Confirm Email";
 
             string emailBody = string.Empty;
-            string path = "wwwroot/templates/verify.html";
+            string path = "wwwroot/templates/confirm.html";
 
             emailBody = _fileService.ReadFile(path, emailBody);
 
@@ -61,26 +60,18 @@ namespace ServiceLayer.Services.Implementations
             message.Body = new TextPart(TextFormat.Html) { Text = emailBody };
 
 
-            //// send email
-            //using (var smtp = new MailKit.Net.Smtp.SmtpClient())
+            // send email
+            using var smtp = new SmtpClient();
 
-            //smtp.Connect(_configuration.GetSection("Smtp:Server").Value, int.Parse(_configuration.GetSection("Smtp:Port").Value), SecureSocketOptions.StartTls);
+            smtp.Connect(_configuration.GetSection("Smtp:Server").Value, int.Parse(_configuration.GetSection("Smtp:Port").Value), SecureSocketOptions.StartTls);
 
-            //smpt.Authenticate(_configuration.GetSection("Smtp:FromAddress").Value, _configuration.GetSection("Smtp:Password").Value);
+            smtp.Authenticate(_configuration.GetSection("Smtp:Mail").Value, _configuration.GetSection("Smtp:Password").Value);
 
-            //smtp.Send(message);
+            smtp.Send(message);
 
-            //smtp.Disconnect(true);
-            using (var smtp = new MailKit.Net.Smtp.SmtpClient())
-            {
-                // ... diğer kodlar ...
-                smtp.Connect(_configuration.GetSection("Smtp:Server").Value, int.Parse(_configuration.GetSection("Smtp:Port").Value), SecureSocketOptions.StartTls);
-                smtp.Authenticate(_configuration.GetSection("Smtp:FromAddress").Value, _configuration.GetSection("Smtp:Password").Value);
-                smtp.Send(message);
-                smtp.Disconnect(true);
-            }
-
+            smtp.Disconnect(true);
         }
+
 
         public void ForgotPassword()
         {

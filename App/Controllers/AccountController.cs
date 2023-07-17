@@ -24,38 +24,7 @@ namespace App.Controllers
         }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> Register([FromForm] RegisterDto registerDto)
-        //{
-        //    try
-        //    {
-        //        RegisterDtoValidator validator = new RegisterDtoValidator();
 
-        //        var validationResult = validator.Validate(registerDto);
-
-        //        if (!validationResult.IsValid)
-        //        {
-        //            return BadRequest(new ApiResponse
-        //            {
-        //                Errors = validationResult.Errors.Select(m => m.ErrorMessage).ToList(),
-        //                StatusMessage = "Failed"
-        //            });
-        //        }
-
-        //        var response = await _accountService.RegisterAsync(registerDto);
-
-        //        if (response.Errors != null)
-        //        {
-        //            return BadRequest(response);
-        //        }
-
-        //        return Ok(response);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(new ApiResponse { Errors = new List<string> { ex.Message } });
-        //    }
-        //}
         [HttpPost]
         public async Task<IActionResult> Register([FromForm] RegisterDto registerDto)
         {
@@ -81,7 +50,8 @@ namespace App.Controllers
 
                 var token = _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                var link = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, token }, Request.Scheme, Request.Host.ToString());
+                var link = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, token },
+                    Request.Scheme, Request.Host.ToString());
 
                 if (link == null) throw new NullReferenceException(nameof(link));
 
@@ -95,26 +65,6 @@ namespace App.Controllers
             }
         }
 
-
-
-        [HttpPost]
-        public async Task<IActionResult> Login([FromForm] LoginDto loginDto)
-        {
-            try
-            {
-                return Ok(await _accountService.LoginAsync(loginDto));
-            }
-            catch (Exception)
-            {
-                return BadRequest("UserName or Password wrong!");
-            }
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> VerifyEmail()
-        {
-            return Redirect("http://localhost:3000/");
-        }
 
 
         [HttpGet]
@@ -132,10 +82,30 @@ namespace App.Controllers
             {
                 throw new InvalidOperationException("An invalid condition has occurred.");
             }
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Login([FromForm] LoginDto loginDto)
+        {
+            try
+            {
+                return Ok(await _accountService.LoginAsync(loginDto));
+            }
+            catch (Exception)
+            {
+                return BadRequest("UserName or Password wrong!");
+            }
         }
 
 
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDto resetPasswordDto)
+        {
+            await _accountService.ResetPasswordAsync(resetPasswordDto);
+
+            return Ok();
+        }
 
 
         [HttpPost]

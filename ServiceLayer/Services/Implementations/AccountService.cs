@@ -38,39 +38,16 @@ namespace ServiceLayer.Services.Implementations
 
         }
 
-        public async Task ConfirmEmailAsync(string userId, string token)
-        {
-            await _emailService.ConfirmEmail(userId, token);
-        }
-
-        public async Task CreateRoleAsync(RoleDto roleDto)
-        {
-            await _roleManager.CreateAsync(new IdentityRole { Name = roleDto.Role });
-        }
-
-        public async Task<string?> LoginAsync(LoginDto loginDto)
-        {
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
-
-            if (user is null) return null;
-
-            if (!await _userManager.CheckPasswordAsync(user, loginDto.Password)) return null;
-
-            var roles = await _userManager.GetRolesAsync(user);
-
-            string token = _tokenService.GenerateJwtToken(user.Email, user.UserName, (List<string>)roles);
-
-            return token;
-        }
+   
 
 
         public async Task<ApiResponse> RegisterAsync(RegisterDto registerDto)
         {
             var user = _mapper.Map<AppUser>(registerDto);
 
+            if (user == null) throw new NullReferenceException();
+
             IdentityResult result = await _userManager.CreateAsync(user, registerDto.Password);
-         
-            await _userManager.AddToRoleAsync(user, "User");
 
             if (!result.Succeeded)
             {
@@ -83,10 +60,55 @@ namespace ServiceLayer.Services.Implementations
                 return response;
             }
 
+            await _userManager.AddToRoleAsync(user, "Admin");
+
             return new ApiResponse { Errors = null, StatusMessage = "Success" };
         }
-  
-        
+
+
+        public async Task ConfirmEmailAsync(string userId, string token)
+        {
+            if (userId == null && token == null) throw new ArgumentNullException();
+
+            AppUser user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null) throw new NullReferenceException();
+
+            await _userManager.ConfirmEmailAsync(user, token);
+        }
+
+
+        public async Task<string?> LoginAsync(LoginDto loginDto)
+        {
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+
+            if (!await _userManager.CheckPasswordAsync(user, loginDto.Password)) return null;
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            string token = _tokenService.GenerateJwtToken(user.Email, user.UserName, (List<string>)roles);
+
+            return token;
+        }
+
+
+
+
+        public async Task CreateRoleAsync(RoleDto roleDto)
+        {
+            await _roleManager.CreateAsync(new IdentityRole { Name = roleDto.RoleName });
+        }
+
+
+        public async Task ResetPasswordAsync(ResetPasswordDto resetPasswordDto)
+        {
+            var user = await _userManager.FindByIdAsync(resetPasswordDto.Email);
+
+            if (user == null) throw new NullReferenceException();
+
+            await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.newPassword);
+        }
+
 
     }
 }
