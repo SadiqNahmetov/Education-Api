@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xAM50hLD2iI+SqR2F9B2eDrKqbqXD75avZEiWOx97f8=",
+  "Hash": "NmzrFtor6cG2IqnwnfjDod5hLpqcA0Hn1EV/auBDvOQ=",
   "Source": "App",
   "BasePath": "_content/App",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\App\\wwwroot\\Templates\\verify.html",
+      "Identity": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\App\\wwwroot\\Templates\\Confirm.html",
       "SourceId": "App",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Sadiq\\Desktop\\Api-Project\\App\\wwwroot\\",
       "BasePath": "_content/App",
-      "RelativePath": "Templates/verify.html",
+      "RelativePath": "Templates/Confirm.html",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,7 +31,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Templates\\verify.html"
+      "OriginalItemSpec": "wwwroot\\Templates\\Confirm.html"
     }
   ]
 }
