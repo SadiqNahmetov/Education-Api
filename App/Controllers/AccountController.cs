@@ -99,6 +99,34 @@ namespace App.Controllers
 
 
 
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword([FromForm] ForgotPasswordDto forgotPasswordDto)
+        {
+            try
+            {
+                var exsistUser = await _userManager.FindByEmailAsync(forgotPasswordDto.Email);
+
+                if (exsistUser == null) return NotFound("User not found");
+
+                var token = await _userManager.GeneratePasswordResetTokenAsync(exsistUser);
+
+                var link = Url.Action(nameof(ResetPassword), "Account", new { userId = exsistUser.Id, token },
+                    Request.Scheme, Request.Host.ToString());
+
+                if (link == null) throw new NullReferenceException(nameof(link));
+
+                _emailService.ForgotPassword(exsistUser, link, forgotPasswordDto);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDto resetPasswordDto)
         {
