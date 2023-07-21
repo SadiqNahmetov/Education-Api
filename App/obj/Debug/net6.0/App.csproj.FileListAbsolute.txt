@@ -368,3 +368,8 @@ C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\MailKit.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\MimeKit.dll
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\App.staticwebassets.runtime.json
 C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Scrutor.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\Sadiq\Desktop\Api-Project\App\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.dll
