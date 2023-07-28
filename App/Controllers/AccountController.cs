@@ -7,6 +7,7 @@ using ServiceLayer.DTOs.Account;
 using ServiceLayer.Services.Interfaces;
 using ServiceLayer.Validations.Account;
 using System.Data;
+using System.Web;
 
 namespace App.Controllers
 {
@@ -101,7 +102,6 @@ namespace App.Controllers
 
 
 
-
         [HttpPost]
         public async Task<IActionResult> ForgotPassword([FromForm] ForgotPasswordDto forgotPasswordDto)
         {
@@ -113,8 +113,8 @@ namespace App.Controllers
 
                 var token = await _userManager.GeneratePasswordResetTokenAsync(exsistUser);
 
-                var link = Url.Action(nameof(ResetPassword), "Account", new { userId = exsistUser.Id, token },
-                    Request.Scheme, Request.Host.ToString());
+
+                var link = $"http://localhost:3000/ResetPassword?email={exsistUser.Email}&token={HttpUtility.UrlEncode(token)}";
 
                 if (link == null) throw new NullReferenceException(nameof(link));
 
@@ -134,7 +134,7 @@ namespace App.Controllers
         {
             await _accountService.ResetPasswordAsync(resetPasswordDto);
 
-            return Ok();
+            return Redirect("http://localhost:3000/Login");
         }
 
 
